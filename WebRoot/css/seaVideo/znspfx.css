@@ -1,0 +1,92 @@
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;
+	overflow:hidden;
+}
+.top,.bottom{
+	width: 100%;
+	height: 50%;
+}
+.bottom{
+	height:49%;
+	padding-top:1%;
+}
+.top .left,.top .right{
+	float: left;
+	width: 50%;
+	height: 100%;
+	position: relative;
+}
+.left .dt,.left .pt{
+	width:100%;
+	height:100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.left .pt{
+	display: none;
+}
+/**
+ * canvas
+ */
+#myCanvas1,#myCanvas2{
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;	
+	background-image: url(../../images/znspfx_bg.jpg);
+	background-size: 100% 100%;
+}
+/**
+ *button
+ */
+.ctrol_button{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 100;
+}
+.ctrol_button input{	
+	width: 105px;
+	height: 40px;
+	white-space:normal;
+	background-color:white;
+	outline:none;
+	border-radius:5px;
+}
+.butter{
+	position: absolute;
+	left: 10px;
+	top: 80px;
+	z-index: 100;
+}
+.butter input{
+	width: 105px;
+	height: 40px;
+	background-color:white;
+	outline:none;
+	border-radius:5px;
+}
+.butter .tzzz{
+	display: none;
+}
+/**
+ *fullImage
+ */
+/*.fullImage{
+	width:100%;
+	height:100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 100;
+	display:none;
+	background-color: rgba(0,0,0,0.5);
+	overflow-x:auto;
+	overflow-y:none;
+}*/
+.bottom img{
+	width:100%;
+	height:100%;
+}

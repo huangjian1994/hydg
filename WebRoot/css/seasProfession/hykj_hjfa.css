@@ -1,0 +1,159 @@
+span {
+	display: inline-block;
+}
+#submit {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    margin-left: -115px;
+    background-color: white;
+    border-radius: 5px;
+    display: none;
+}
+.fr {
+	float: right;
+}
+
+#map {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 40px;
+	bottom: 0;
+}
+.tools a{
+	color:white;
+}
+.tools a:hover{
+	color:white;
+}
+.container {
+	position: absolute;
+	left: 15px;
+	top: 80px;
+}
+/* menu */
+.option {
+	width: 45px;
+	height: 45px;
+	position: absolute;
+	left: 5px;
+	top: 50px;
+}
+option menu-title{
+	
+}
+.option img {
+	padding: 6.5px 6.5px;
+}
+.option-icon img{
+	width:44px;	
+	padding:0;
+	background: #efefef;
+}
+.option .option-icon {	
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.option-contain {
+	display: none;
+	/*width: 200px;*/
+	/* max-height: 300px; */
+	border-radius: 6px;
+	background-color: #fff;
+	position: absolute;
+    left: 5px;
+    top: 50px;
+}
+
+.option-contain ul li {	
+	overflow: hidden;
+}
+
+.option-contain ul li .menu-list:hover {
+	background-color: #eee;
+}
+
+.option-contain li span {
+	font-size: 14px;
+}
+
+.option-contain .operate {
+	display: inline-block;
+	padding:5px 5px 5px 20px;
+	float:right;
+}
+
+.operate span {
+	padding: 0 2px;
+}
+.option-contain .menu-top div{
+	background-image: url(../../images/menu-top.png);
+	background-size: cover;
+	ilter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://localhost:8080/hydg/images/menu-top.png', sizingMethod='scale');
+}
+.menu-top div span{
+	padding: 0 23px 0 60px;
+	color: white;
+	line-height:35px;
+}
+.menu-top div img{
+	padding-right:10px;
+	padding-top:13px;
+}
+.option-contain .menu{
+	overflow-y:auto;
+	max-height:500px;
+	background-image: url(../../images/menu-bg.png);
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://localhost:8080/hydg/images/menu-bg.png', sizingMethod='scale');
+}
+
+.option-contain .dropdown-taggle {
+	overflow: hidden;
+	padding: 0 5px;
+}
+.dropdown-taggle .menu-list{
+	border-bottom:1px solid #e6ebed;
+}
+.menu-list input{
+	margin-left:6px;
+}
+.menu-list span{
+	margin-left: 8px;
+	border-left:1px solid #f2e3df;
+	padding:5px;
+}
+.option-contain .dropdown-menu {
+	display: none;
+	margin-top: 5px;	
+	text-align: center;
+	border-bottom: 1px solid #e6ebed;
+}
+.dropdown-menu  table .line{
+	word-break: keep-all;
+	padding:4px;	
+}
+
+.dropdown-menu  table .line-button{	
+	padding:4px;
+	text-align:center;	
+}
+.option-contain .dropdown-menu  table .line-button button{
+	line-height:20px;
+	height:20px;
+	padding:0 10px;
+	background-color:black;
+}
+#submit label {
+    display: inline-block;
+    width: 95px;
+    text-align: right;
+}
+/*.option .dropdown-menu .button {
+	height: 30px;
+	padding: 2px 10px;
+	line-height: 30px;
+	text-align: center;
+}*/

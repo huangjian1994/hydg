@@ -1,0 +1,104 @@
+/* 海岸线列表*/
+#map{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 210px;
+	right: 0;
+	bottom: 0;
+	top: 0;
+}
+.controlVisible{
+	width: 35px;
+    height: 35px;
+    background-color: #f0f9fd;
+    border-bottom: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
+    position: absolute;
+    left: 210px;
+    top: 0px;
+    text-align: center;
+    z-index: 1000;
+}
+.controlVisible img{	
+	padding: 6px;
+    width: 24px;
+    height: 24px;
+    transform: rotate(180deg);
+}
+.seabedLine{
+	border-right: 1px solid #eeeeee;
+    width: 209px;
+    height: 100%;   
+    position: relative;
+    left: 0;
+    top: 0;
+}
+.seabedLine .title{
+	height: 35px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    background: url(../../images/itabbg.png) repeat-x;   
+    color: black;
+    border-bottom: solid 1px #eeeeee;
+}
+.seabedLine .contain{
+	width: 100%;
+    height: 100%;    
+    overflow: hidden;
+}
+.contain .menuList{
+	cursor: pointer;    
+    background-color: white;
+}
+.menuList li{
+	padding: 10px 10px;	
+	font-size: 16px;
+}
+.active{	
+    background-color: lightcoral;    
+    color:#fff;
+}
+.menuList .active a {
+    color: #fff;
+}
+/* 设置 */
+.seabedSet{   
+    display: none; 
+    position: absolute;
+    right: 100px;
+    top: 100px;
+    background-color: #fff;
+    z-index: 1000;
+}
+/*滚动条*/
+
+#scroll{
+    height: 90%;
+    overflow-y: auto;
+}
+.zUIpanelScrollBox,
+.zUIpanelScrollBar {
+    width: 10px;
+    top: 4px;
+    right: 2px;
+    border-radius: 5px;
+}
+
+.zUIpanelScrollBox {
+    background: transparent;
+    opacity: 0.1;
+    filter: alpha(opacity=10);
+    z-index: 1000;
+}
+
+.zUIpanelScrollBar {
+    background: black;
+    opacity: 0.6;
+    filter: alpha(opacity=80);
+    z-index: 1000;
+}

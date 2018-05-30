@@ -1,0 +1,46 @@
+.main_control{
+	width:100%;
+	height:40%;
+	border:1px solid #b3bbc9;
+	border-radius: 5px;
+	background:#f1f1f1;
+	position: relative;
+	behavior: url(PIE.htc)
+}
+.cbg{width:75%;
+	height:0;
+	padding-bottom:75%;
+	background-image:url(../img/cbg.png);
+	background-size:100% 100%;
+	margin:0 auto;
+	position:absolute;
+	left:15%;
+	top:5%;
+	behavior: url(PIE.htc);
+	behavior: url(backgroundsize.min.htc);	
+}
+table{border-collapse:collapse;}
+
+ .cbg table tr td{
+ 	/* border:1px solid red; */
+ 	 position:relative;
+} 
+ a{cursor:pointer;}           
+ .down_{width:65%;        
+        height:25%;
+        position:absolute;
+        left:25%;
+        bottom:0;
+        text-align:center;} 
+  .down_ table tr{margin-bottom: 5px;} 
+  .suo{position:absolute;
+       left:0;
+       top:0;
+       width:15%;
+       }  
+  .shubiao{position:absolute;
+       right:0;
+   	   top:0;width:15%;} 
+  .dingwei {position:absolute;
+       left:0;
+   	   top:55%;width:15%;}

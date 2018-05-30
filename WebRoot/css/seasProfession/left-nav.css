@@ -1,0 +1,774 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: "微软雅黑";
+    margin: 0px;
+    padding: 0px;
+    font-size: 1em;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+img,
+input {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    box-shadow: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    text-align: left;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.show {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.disabled {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    cursor: default;
+}
+
+.gray {
+    color: gray;
+}
+
+.pl {
+    padding-left: 24px;
+}
+
+
+/* 滚动条 */
+
+#scroll,#scroll2{
+    height: 90%;
+    overflow-y: auto;
+}
+#scroll1 {
+    height: 60%;
+    overflow-y: auto;
+}
+.zUIpanelScrollBox,
+.zUIpanelScrollBar {
+    width: 10px;
+    top: 4px;
+    right: 2px;
+    border-radius: 5px;
+}
+
+.zUIpanelScrollBox {
+    background: transparent;
+    opacity: 0.1;
+    filter: alpha(opacity=10);
+    z-index: 1000;
+}
+
+.zUIpanelScrollBar {
+    background: black;
+    opacity: 0.6;
+    filter: alpha(opacity=80);
+    z-index: 1000;
+}
+/*  */
+
+.control-visible {
+    width: 35px;
+    height: 35px;
+    background-color: #f0f9fd;
+    border-bottom: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.control-visible a img {
+    padding-top: 6px;
+    width: 24px;
+    height: 24px;
+}
+
+.control-visible i {
+    font-size: 34px;
+}
+
+.contain {
+    display: none;
+    border-right: 1px solid #eeeeee;
+    width: 300px;
+    height: 100%;
+    background-color: #f0f9fd;
+    position: absolute;
+    left: 0;
+    top: 0px;
+}
+
+.lefttop {
+    height: 35px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f0f9fd;
+    color: black;
+    border-bottom: solid 1px #eeeeee;
+}
+
+.opmenu {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 169px;
+    z-index: 1000;
+    width: 130px;
+    height: 55px;
+    background-color: #f0f9fd;
+    cursor: pointer;
+    align-items: flex-start;
+    border-left: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.opmenu:hover {
+    background-color: #DEF2FF;
+}
+
+.opmenu button {
+    border: 0;
+    box-shadow: none;
+    background: none;
+    font-weight: normal;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.opmenu span {
+    font-size: 13px;
+    display: block;
+}
+
+.lefttop img {
+    padding-top: 6px;
+    margin-left: 10px;
+}
+
+.lefttop .close {
+    width: 24px;
+    height: 24px;
+}
+
+.lefttop span {
+    font-weight: 400;
+    font-size: 16px;
+    color: gray;
+}
+
+.leftmenu {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f9fd;    
+    overflow: hidden;
+}
+
+.title {
+    cursor: pointer;
+    padding-left: 10px;
+    background-color: #d4e7f0;
+}
+
+.layer-icon {
+    display: none;
+    cursor: pointer;
+    padding-left: 10px;
+    background-color: #d4e7f0;
+}
+
+.layer-info {
+    display: none;
+}
+
+.layer-infobody {
+    display: none;
+}
+
+.infobody-menu {
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+    cursor: pointer;
+}
+
+.infobody-menu:hover {
+    background-color: #DEF2FF;
+}
+
+.infobody-menu p {
+    font-size: 15px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.layer {
+    position: relative;
+}
+
+.layer-invisible:after {
+    content: " ";
+    display: block;
+    background: #e3f0f6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -2em;
+    z-index: 999;
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.layer .legend {
+    width: 24px;
+    height: 20px;
+}
+
+.layer .first-menu {
+    line-height: 35px;
+    font-size: 15px;
+    vertical-align: middle;
+    position: relative;
+    border-top: 1px solid #eeeeee;
+    overflow: hidden;
+}
+
+.layer .second-menu,
+.layer .third-menu,
+.layer .fourth-menu,
+.layer .fifth-menu {
+    display: none;
+    line-height: 35px;
+    font-size: 13px;
+    vertical-align: middle;
+    position: relative;
+}
+
+.layer .second-menu span {
+    font-weight: 400;
+}
+
+.layer .second-menu li,
+.layer .third-menu li,
+.layer .fourth-menu li,
+.layer .fifth-menu li {
+    padding-left: 23px;
+}
+
+.layer .two,
+.layer .three,
+.layer .four,
+.layer .fifth-menu li {
+    border-top: 1px solid #eeeeee;
+}
+
+.layer .two,
+.layer .three,
+.layer .four,
+.layer .five {
+    position: relative;
+}
+
+.layer .first-menu:hover,
+.layer .two:hover,
+.layer .three:hover,
+.layer .four:hover,
+.layer .five:hover,
+.layer .jt:hover {
+    background-color: #DEF2FF;
+}
+
+.layer .list-two,
+.layer .list-three,
+.layer .list-four,
+.layer .list-five {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.layer .jt {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    border-left: 1px solid #eeeeee;
+    border-top: 1px solid #eeeeee;
+    z-index: 99;
+    background-color: #d4e7f0;
+}
+
+.layer .list-two .list-three .jt {
+    right: 46px;
+}
+
+.layer .list-two .jt {
+    right: 23px;
+}
+
+.layer .list-two .list-three .list-four .jt {
+    right: 69px;
+}
+
+.layer .list-two .list-three .list-four .list-five .jt {
+    right: 92px;
+}
+
+.layer .jt img {
+    transform: rotate(180deg)
+}
+
+
+
+/*地图工具*/
+
+.highlight {
+    border: 1px solid #C8E9FF;
+    background: #E9F6FF;
+}
+
+.active {
+    position: relative;
+    border-radius: 0.25rem;
+    padding-bottom: 0.5em;
+    min-height: 4.95em;
+    overflow: visible;
+}
+
+.active:before {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    z-index: 601;
+    border-color: rgba(194, 225, 245, 0);
+    border-left-color: #E9F6FF;
+    border-width: 1.05em;
+    margin-top: -1.02em;
+}
+
+#map {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+}
+
+.toolsmenu {
+    display: none;
+    width: 100%;
+    height: 110px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.maptools {
+    width: 35px;
+    height: 35px;
+    margin-top: -1px;
+    background: #FFFFFF url(../../images/seasProfession/arcgis/icon-tool.png) center no-repeat;
+    border: 1px solid #D9D9D9;
+    border-top: 1px solid #ffffff;
+    border-right: 0;
+    border-bottom-left-radius: 0.25rem;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    z-index: 500;
+    cursor: pointer;
+}
+
+.tabscont {
+    padding-top: 3px;
+}
+
+.tabsbox .top {
+    border-bottom: 1px solid #eeeeee;
+    background-color: #eeeeee;
+}
+
+.tabsbox .top li {
+    display: inline-block;
+    border: 1px solid #eeeeee;
+    border-bottom: none;
+    line-height: 30px;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+}
+
+.tabsbox .top li a.selected {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    background-color: white;
+    display: block;
+    margin: 0px;
+    color: #1B7DBF;
+    padding-bottom: 5px;
+}
+
+.tabsbox .top li a:hover {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    background-color: white;
+    display: block;
+    margin: 0px;
+    color: #1B7DBF;
+    padding-bottom: 5px;
+}
+
+.tabsbox ul li a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #1B7DBF;
+}
+
+.tabscont .tools {
+    border: 1px solid #eeeeee;
+    position: relative;
+}
+
+.tabscont .tools ul {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.tabscont .tools li {
+    float: left;
+}
+
+.tabscont .tools button {
+    min-width: 4em;
+    max-width: 8em;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 0.2em;
+    margin: 0.25em 0.05em;
+    list-style-type: none;
+}
+
+.tabscont .tools button img {
+    display: block;
+    margin: 0.5em auto;
+    width: 24px;
+    height: 24px;
+}
+
+.tabscont .tools button p {
+    font-size: 12px;
+}
+
+.tabscont .tools button:hover {
+    cursor: pointer;
+    border: 1px solid #197DC9;
+    background: #E9F6FF;
+}
+
+
+/* 滑块控制 */
+
+.slider {
+    width: 35px;
+    height: 5px;
+    background-color: #eeeeee;
+    right: 13px;
+    top: 12px;
+}
+
+.list-two .slider {
+    right: 36px;
+}
+
+.ui-slider .ui-slider-handle {
+    width: 7px;
+    height: 17px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -6.5px;
+    margin-left: -3.5px;
+}
+
+
+/* 搜索结果 */
+
+.layer-search {
+    display: none;
+}
+
+.search-results {
+    display: none;
+    height:100%;
+}
+
+.search-results .list-menu {
+    border-bottom: 1px solid #eeeeee;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.search-results .list-menu:hover {
+    background-color: #DEF2FF;
+}
+
+.search-results .list-menu span {
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+.search-location,
+.search-info {
+    display: none;
+    height:100%;
+}
+
+
+/* 详细信息 */
+
+.search-location span {
+    display: inline-block;
+    width: 200px;
+    height: 35px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/* 查询  */
+
+.inquiry,
+.inquiry-info,
+.inquiry-location {
+    display: none;
+    height: 35px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f0f9fd;
+    color: black;
+    border-bottom: solid 1px #eeeeee;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.inquiry-menu,
+.inquiry-results,
+.inquiryResult-info {
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f9fd;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    z-index: 999;
+}
+
+.select-box {
+    padding: 8px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#select_layer {
+    width: 100%;
+    height: 26px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inquiry-menu .condition {
+    margin-top: 10px;
+    /* overflow:hidden; */
+}
+
+#result_contain {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    border: 1px solid #eeeeee;
+    padding: 4px;
+    background-color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#result_contain p:hover {
+    background-color: #f0f9fd;
+}
+
+#filter {
+    height: 26px;
+    max-width: 80px;
+}
+
+#operator {
+    margin-left: 5px;
+    height: 26px;
+    width: 60px;
+}
+
+#result {
+    margin-left: 5px;
+    height: 16px;
+    width: 100px;
+}
+
+.add_query .button {
+    padding: 5px;
+    margin-left: 8px;
+    height: 35px;
+    margin-top: 10px;
+    outline: none;
+    background: #F2F2F2;
+    border: 1px solid #CCCCCC;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    color: #1B7DBF;
+}
+
+
+/* 分页 */
+
+#demoContent,
+#demoContent1 {
+    height: 60%;
+}
+
+#demoContent li,
+#demoContent1 li {    
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 5px;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 25px;
+    vertical-align: middle;
+}
+
+#demoContent li:hover,
+#demoContent1 li:hover {
+    background-color: #DEF2FF;
+}
+
+#demoContent li span,
+#demoContent1 li span {
+    margin-left: 3px;
+}
+
+.page {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.page>li {
+    float: left;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.page .pageItem {
+    font-size: 0.8em;
+    border: solid thin #DDDDDD;
+    margin: 5px;
+}
+
+.page .pageItemActive {
+    font-size: 0.8em;
+    border: solid thin #0099FF;
+    margin: 5px;
+    background-color: #0099FF;
+    color: white;
+}
+
+.page .pageItem:hover {
+    border: solid thin #0099FF;
+    background-color: #0099FF;
+    color: white;
+}
+
+.page .pageItemDisable {
+    font-size: 0.8em;
+    border: solid thin #DDDDDD;
+    margin: 5px;
+    background-color: #DDDDDD;
+}
+
+
+/* home */
+
+#HomeButton {
+    position: absolute;
+    top: 90px;
+    left: 70px;
+    z-index: 55;
+    width: 30px;
+    height: 30px;
+}

@@ -1,0 +1,40 @@
+/**
+系统信息
+**/
+.tc{
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	/*z-index:99;*/	
+}
+.tc div .icon{
+	float: left;
+	padding: 9px 0 0 5px;
+}
+.tc div .info{
+	float: left;
+	line-height: 30px;
+}
+.tc div .close{
+	float: right;
+	padding: 3px 5px 0 0
+}
+.tc .tc-main{
+	background-color:white;
+	height:210px;
+	width:100%;	
+	overflow-y:auto;	
+}
+.tc .tc-main ul{
+	width:100%;
+	height:210px;
+}
+.tc ul li{
+	padding:0px 5px;
+}
+.tc span{
+	word-wrap:break-word; 
+	word-break:break-all; 
+	overflow: hidden;
+}
+/**/
