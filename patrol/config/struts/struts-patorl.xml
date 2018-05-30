@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 巡查考评 -->
+	<package name="patorl" namespace="/patorl" extends="struts-default">
+		<action name="patorl_*" class="patorlAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			<!-- 人员考核 -->
+			<result name="goXckpRykhList" >/jsp/seasInspection/jsp/xckp/xckp_rykh_index.jsp</result>
+			<result name="addRykhSuccess" type="redirect">/patorl/patorl_fetchXckhRykh.do</result>
+			<result name="goXckpRykhDetail" >/jsp/seasInspection/jsp/xckp/xckp_rykh_detail.jsp</result>
+			<result name="goXckpRykhUpdate" >/jsp/seasInspection/jsp/xckp/xckp_rykh_update.jsp</result>
+			
+			<result name="goXckpRykhTj1" >/jsp/seasInspection/jsp/xckp/xckp_rykh_tj.jsp</result>
+			<result name="goXckpRykhTj2" >/jsp/seasInspection/jsp/xckp/xckp_rykh_tj2.jsp</result>
+			<result name="goXckpRykhTj3" >/jsp/seasInspection/jsp/xckp/xckp_rykh_tj3.jsp</result>
+			<result name="goXckpRykhTj4" >/jsp/seasInspection/jsp/xckp/xckp_rykh_tj4.jsp</result>
+						
+			<!-- 下载统计表数据 -->
+			<param name="fileName"></param>  
+			<result name="downLoadRykh" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileRykh</param>
+		     </result>
+			
+			<!-- 下载人员考核数据 -->
+			<param name="fileName"></param>  
+			<result name="downLoadRykhData" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileRykhData</param>
+		     </result>
+			
+			
+			<!--单位考核 -->
+			<result name="goXckpDwkhList" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_index.jsp</result>
+			<result name="goAddDwkhSuccess" type="redirect">/patorl/patorl_fetchXckpDwkh.do</result>
+			<result name="goXckpDwkhUpdate" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_update.jsp</result>
+			<result name="goXckpDwkhDetail" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_detail.jsp</result>
+			
+			<result name="goXckpDwkhTj" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_tj.jsp</result>
+			<result name="goXckpDwkhTj2" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_tj2.jsp</result>
+			<result name="goXckpDwkhTj3" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_tj3.jsp</result>
+			<result name="goXckpDwkhTj4" >/jsp/seasInspection/jsp/xckp/xckp_dwkh_tj4.jsp</result>
+			
+			
+			<!-- 下载统计表数据 -->
+			<param name="fileName"></param>  
+			<result name="downLoadDwkh" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileDwkh</param>
+		     </result>
+			
+			<!-- 下载单位考核数据 -->
+			<param name="fileName"></param>  
+			<result name="downLoadDwkhData" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileDwkhData</param>
+		     </result>
+			
+			
+		</action>
+	</package>
+</struts>

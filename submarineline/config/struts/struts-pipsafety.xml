@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 海底管线安全-->
+	<package name="pip" namespace="/pip" extends="struts-default">
+		<action name="pip_*" class="pipelinesafetyAction" method="{1}" >
+			<result name="znyjJsp">/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_znyj.jsp</result>
+			<result name="yjcbxq">/jsp/seabedPipeline/jsp/seabedPipelineSafe/yjcbdwxx_detail.jsp</result>
+			<result name="aqdbldxq">/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_dbldxq.jsp</result>
+
+			<result name="yjtjYear">/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_hztj.jsp</result>
+			<result name="yjtjMonth">/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_hztjMonth.jsp</result>
+			<result name="yjtjDay">/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_hztjDay.jsp</result>
+
+			<param name="fileName"></param>
+			<result name="downLoadYearData" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param>
+				<param name="inputName">downLoadFileYearData</param>
+			</result>
+
+			<param name="fileName"></param>
+			<result name="downLoadMonthData" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param>
+				<param name="inputName">downLoadFileMonthData</param>
+			</result>
+
+			<param name="fileName"></param>
+			<result name="downLoadDayData" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param>
+				<param name="inputName">downLoadFileDayData</param>
+			</result>
+
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="status" namespace="/status" extends="struts-default">
+		<action name="status_*" class="statusAction" method="{1}" >
+			<interceptor-ref name="defaultStack" >
+				<param name="exception.logEnabled">true</param>
+				<param name="exception.logLevel">error</param>
+			</interceptor-ref>
+
+			<result name="zhcx">/jsp/seasInspection/jsp/inquireStatistics/cxtj_zhcx.jsp</result>
+			<result name="ssjk">/jsp/seasInspection/jsp/stausTrack/ztgz_ssjk.jsp</result>
+			<result name="gjhf">/jsp/seasInspection/jsp/stausTrack/ztgz_gjhf.jsp</result>
+			<result name="xcqy">/jsp/seasInspection/jsp/stausTrack/ztgz_xcqy.jsp</result>
+			<result name="xxzt">/jsp/seasInspection/jsp/stausTrack/ztgz_xxzt.jsp</result>
+
+			<result name="spfw_detail">/jsp/seasInspection/jsp/inquireStatistics/zhcx_detail.jsp</result>
+
+			<result name="xmtj">/jsp/seasInspection/jsp/inquireStatistics/cxtj_xmtj.jsp</result>
+			<result name="hyqytj">/jsp/seasInspection/jsp/inquireStatistics/cxtj_hyqytj.jsp</result>
+
+			<result name="downloadFlowAttachment" type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+			</result>
+
+			<param name="fileName"></param>
+			<result name="downXmtjXz" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param>
+				<param name="inputName">downXmtjXz</param>
+			</result>
+			
+		</action>
+	</package>
+</struts>

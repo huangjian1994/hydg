@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<package name="patorlReport" namespace="/patorlReport" extends="struts-default">
+		<action name="patorlReport_*" class="patorlReportAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			<!-- 巡查上报 -->
+			<result name="reportIndex" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcwtsb.jsp</result>
+			<result name="addReportSuccess" type="redirect">/patorlReport/patorlReport_fetchPatorlReport.do</result>
+			
+			<result name="goReportDetail" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcwtsb_detail.jsp</result>
+			<result name="goReportUpdate" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcwtsb_update.jsp</result>
+			<result name="reportZpDetail" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcwtsb_detail_zp.jsp</result>
+			<!-- 巡查信息反馈 -->
+			<result name="xcfkIndex" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk.jsp</result>
+			<result name="goXcxxfkDetail" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk_detail.jsp</result>
+			<result name="addXcxxfkSuccess" type="redirect">/patorlReport/patorlReport_fetchPatorlFk.do?xcjhID=${xcjhID}</result>
+			<result name="xcfk_Index" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk_index.jsp</result>
+			<result name="goAddXcxxfk" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk_add.jsp</result>
+			<result name="goXcxxfkUpdate" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk_update.jsp</result>
+			<result name="xcfkxxZpDetail" >/jsp/seasInspection/jsp/islandInspection/hdxc_xcxxfk_detail_zp.jsp</result>
+			<result name="deleteZpSuccess" type="redirect">/patorlReport/patorlReport_getXcxxfkForUpdate.do?xcjhID=${xcjhID}&amp;fkID=${fkID}</result>
+			
+			
+
+			
+		</action>
+	</package>
+	
+		<!-- 海域海岛计划 -->
+			<package name="seaIslandPatrol" namespace="/seaIslandPatrol" extends="struts-default">
+				<action name="seaIslandPatrol_*" class="seaIslandPatrolAction" method="{1}" >
+					<result name="dlCs" >/jsp/chaoshi.jsp</result>
+		
+					<result name="xcjhIndex" >/jsp/seasInspection/jsp/islandInspection/hyhdxc_rwxp.jsp</result>
+					<result name="addxcjhSuccess" type="redirect">/seaIslandPatrol/seaIslandPatrol_fetchXcjh.do</result>
+
+					<result name="shSuccess" type="redirect">/seaIslandPatrol/seaIslandPatrol_fetchXcjhShList.do</result>
+					<result name="xcjhshIndex" >/jsp/seasInspection/jsp/islandInspection/hyhdxc_rwsh.jsp</result>
+					<result name="goXcjhSh" >/jsp/seasInspection/jsp/islandInspection/rwsh_sh.jsp</result>
+					<result name="goXcjhShDetail" >/jsp/seasInspection/jsp/islandInspection/rwsh_detail.jsp</result>
+					<result name="goXcjhUpdate" >/jsp/seasInspection/jsp/islandInspection/xcjhgl_update.jsp</result>
+
+					<!-- 出海巡查-->
+
+					<result name="chxc">/jsp/seasInspection/jsp/islandInspection/chxc.jsp</result>
+				</action>
+			</package>
+</struts>

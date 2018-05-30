@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="seapatorl" namespace="/seaPatorl" extends="struts-default">
+		<action name="swPatorl_*" class="seawallPatorlAction" method="{1}" >
+			<interceptor-ref name="defaultStack" >
+				<param name="exception.logEnabled">true</param>
+				<param name="exception.logLevel">error</param>
+			</interceptor-ref>
+			<result name="statistic" >/jsp/seasInspection/jsp/inquireStatistics/cxtj_zttj.jsp</result>
+			<result name="zhcx">/jsp/seasInspection/jsp/inquireStatistics/cxtj_zhcx.jsp</result>
+			<result name="spfw_detail">/jsp/seasInspection/jsp/inquireStatistics/zhcx_detail.jsp</result>
+			<result name="spfw_flows">/jsp/seasInspection/jsp/inquireStatistics/zhcx_flows.jsp</result>
+
+			
+			<result name="loadFlows" >/jsp/seasInspection/jsp/seawallInspectionManagement/dmcjsb_rwgl.jsp</result>
+			<result name="addSpr" >/jsp/seasInspection/jsp/seawallInspectionManagement/sbgl_add.jsp</result>
+			<result name="sprInfo" >/jsp/seasInspection/jsp/seawallInspectionManagement/sbgl_info.jsp</result>
+			<result name="toViewSpr" type="redirectAction" >/swPatorl_loadSprs.do</result>
+			<result name="seawallPatrolReports">/jsp/seasInspection/jsp/seawallInspectionManagement/dmcjsb.jsp</result>
+			<result name="sprsShow">/jsp/seasInspection/jsp/seawallInspectionManagement/sprsView.jsp</result>
+			
+			
+			<!--系统比对-->
+			<result name="loadCompares">/jsp/seasInspection/jsp/seawallInspectionManagement/xtbd.jsp</result>
+			<result name="compare">/jsp/seasInspection/jsp/seawallInspectionManagement/compare.jsp</result>
+			<result name="reloadCompares" type="redirectAction" >/swPatorl_loadCompares.do</result>
+			<result name="compareResult" >/jsp/seasInspection/jsp/seawallInspectionManagement/compareResult.jsp</result>
+			
+			
+			<result name="downloadFlowAttachment" type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+			</result>
+			
+		</action>
+	</package>
+</struts>

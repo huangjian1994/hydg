@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="submarineline" namespace="/submarineline" extends="struts-default">
+		<action name="submarineline_*" class="submarinelineAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			
+			<result name="goWgjbIndex" >/jsp/seabedPipeline/jsp/seabedPipelineSafe/wgjb/wgjb_index.jsp</result>
+			<result name="addWgjbSuccess" type="redirect">/submarineline/submarineline_fetchWgjbList.do</result>
+			
+			<result name="goWgjbDetail" >/jsp/seabedPipeline/jsp/seabedPipelineSafe/wgjb/wgjb_detail.jsp</result>
+			<result name="goUpdateWgjb" >/jsp/seabedPipeline/jsp/seabedPipelineSafe/wgjb/wgjb_update.jsp</result>
+			
+		</action>
+	</package>
+</struts>

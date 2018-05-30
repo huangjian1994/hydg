@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 船舶AIS-->
+	<package name="ais" namespace="/ais" extends="struts-default">
+		<action name="ais_*" class="aisAction" method="{1}" >
+			<result name="cbswxx">/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_index.jsp</result>
+			<result name="cbdaxx">/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdaxx.jsp</result>
+
+			<result name="cbjtsj">/jsp/seabedPipeline/jsp/shipPositioningInformation/cbjtsj.jsp</result>
+
+			<result name="cbxq">/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_detail.jsp</result>
+
+
+		</action>
+	</package>
+</struts>

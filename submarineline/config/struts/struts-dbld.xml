@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 地波雷达-->
+	<package name="dbld" namespace="/dbld" extends="struts-default">
+		<action name="dbld_*" class="dbldAction" method="{1}" >
+			<result name="dbldxx">/jsp/seabedPipeline/jsp/groundWaveRadarInformation/dbldxx_index.jsp</result>
+
+			<result name="dbldcbxq">/jsp/seabedPipeline/jsp/groundWaveRadarInformation/dbldcbxx_detail.jsp</result>
+			<result name="dbldxq">/jsp/seabedPipeline/jsp/groundWaveRadarInformation/dbldxq.jsp</result>
+		</action>
+	</package>
+</struts>
