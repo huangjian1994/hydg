@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 数字证书登录 -->
+	<package name="uk" extends="struts-default">
+		<action name="loginuk" class="userAction" method="loginuk" >
+		<result type="redirect">/index1.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 首页初始化Action -->
+	<package name="index" namespace="/index" extends="struts-default">
+		<action name="index_*" class="indexAction" method="{1}">
+			<result name="content">/content.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 用户管理 -->
+	<package name="user" namespace="/user" extends="struts-default">
+		<action name="user_*" class="userAction" method="{1}" >
+		
+			<result name="input" >/login.jsp</result>
+			<result name="logOut" type="redirect">/login.jsp</result>
+			<result name="success">/jsp/homepage.jsp</result>
+			<!-- 
+			<result type="redirect">/index1.jsp</result>
+			 -->
+			
+			<result name="toMain">/jsp/shouye/sy_index.jsp</result>
+			<result name="userList">/jsp/xtgl/user/user_index.jsp</result>
+			<result name="toUserDetail" >/jsp/xtgl/user/user_detail.jsp</result>
+			<result name="toUserEdit">/jsp/xtgl/user/user_edit.jsp</result>
+			<result name="toUserAdd">/jsp/xtgl/user/user_add.jsp</result>
+			<result name="toUserEdit2">/jsp/xtgl/user/user_edit2.jsp</result>
+			
+			<!-- 无 -->
+			<result name="toUserEdit_user">/jsp/auth/user/user_UserEdit.jsp</result>
+			
+			
+			<result name="toUserList" type="redirect">/user/user_list.do</result>
+			<result name="editSuc" type="redirect">/index/index_init.do</result>
+		</action>
+	</package>
+	<!-- 菜单管理 -->
+	<package name="menu" namespace="/menu" extends="struts-default">
+		<action name="menu_*" class="menuAction" method="{1}">
+			<result name="menuList">/jsp/xtgl/menu/menu_list.jsp</result>
+			<result name="menuAdd" >/jsp/xtgl/menu/menu_add.jsp</result>
+			<result name="menuEdit">/jsp/xtgl/menu/menu_edit.jsp</result>
+			<result name="toMenuList" type="redirect">/menu/menu_list.do</result>
+			
+			<!-- 无 -->
+			<result name="firstUrl_cllrjk">/jsp/bottom/bottom_cllrjk.jsp</result>
+			
+		</action>
+		
+	</package>
+	<!-- 角色管理 -->
+	<package name="role" namespace="/role" extends="struts-default">
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="roleList">/jsp/xtgl/role/role_index.jsp</result>
+			<result name="setAuth">/jsp/xtgl/role/role_add2.jsp</result>
+			<result name="roleEdit">/jsp/xtgl/role/role_edit.jsp</result>
+			<result name="toRoleList" type="redirect">/role/role_list.do</result>
+		</action>
+	</package>
+	
+	<!-- 日志管理 -->
+	<package name="log" namespace="/log" extends="struts-default">
+		<action name="log_*" class="logAction" method="{1}">
+			<result name="logList">/jsp/xtgl/log/log_index.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 字典管理 -->
+	<package name="config" namespace="/config" extends="struts-default">
+		<action name="config_*" class="configAction" method="{1}" >
+			<result name="configListSuc" >/jsp/xtgl/config/config_index.jsp</result>
+		    <result name="editkeySuc">/jsp/xtgl/config/config_edit.jsp</result>
+		    
+			<result name="addKeySuc" type="redirect">/config/config_list.do</result>
+		    <result name="delkeySuc" type="redirect">/config/config_list.do</result>
+		    <result name="updateKeySuc" type="redirect">/config/config_list.do</result>
+		</action>
+	</package>
+	
+	<!-- 备份管理 -->
+	<package name="sjbf" namespace="/sjbf" extends="struts-default">
+		<action name="sjbf_*" class="sjbfAction" method="{1}" >
+			<result name="showDateListSuc">/jsp/xtgl/bfgl/bfgl_index.jsp</result>
+			<result name="deleteFileSuc" type="redirect">/sjbf/sjbf_showDateList.do</result>		
+		</action>
+	</package>	
+	
+	
+	<!-- 手动执行 -->
+	<package name="ds" namespace="/ds" extends="struts-default">
+		<action name="ds_*" class="dsAction" method="{1}">
+			<result name="goSdzx">/jsp/xtgl/sdzxIndex.jsp</result>
+			
+			<result name="chaoshi">/jsp/chaoshi.jsp</result>
+		</action>
+	</package>
+	
+</struts>
