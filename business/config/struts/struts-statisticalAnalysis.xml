@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 海域使用动态管理  统计分析 -->
+	<package name="statisticalAnalysis" namespace="/statisticalAnalysis" extends="struts-default">
+		<action name="statisticalAnalysis_*" class="statisticalAnalysisAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			<!-- 海域使用统计数据 -->
+			<result name="goHysytj" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysytj.jsp</result>
+			<result name="goHysytj2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysytj2.jsp</result>
+			<result name="goHysytj3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysytj3.jsp</result>
+			
+			<!-- 海域使用现状图 -->
+			<result name="goHysyxzt" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt.jsp</result>
+			<result name="goHysyxzt2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt2.jsp</result>
+			<result name="goHysyxzt3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt3.jsp</result>
+			<result name="goHysyxzt2_1" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt2_1.jsp</result>
+			<result name="goHysyxzt2_2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt2_2.jsp</result>
+			<result name="goHysyxzt2_3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hysyxzt2_3.jsp</result>
+			
+
+			<!-- 海域资源价值指标统计汇总 -->
+			<result name="goHyzyjzzb" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb.jsp</result>
+			<result name="goHyzyjzzb2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb2.jsp</result>
+			<result name="goHyzyjzzb3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb3.jsp</result>
+			
+			<result name="goHyzyjzzbEwjcb" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb_ewjcb.jsp</result>
+			
+			<result name="goHyzyjzzbHbtj" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb_hbtj.jsp</result>
+			<result name="goHyzyjzzbHbtj2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_hyzyjzzb_hbtj2.jsp</result>
+			
+			<!-- 地面监视监测报告 -->
+			<result name="goDmjsjcbgJhzfqk" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_jhzfqk.jsp</result>
+			<result name="goDmjsjcbgJhzfqk2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_jhzfqk2.jsp</result>
+			<result name="goDmjsjcbgJhzfqk3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_jhzfqk3.jsp</result>
+			
+			<result name="goDmjsjcbgHysydt" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_hysydt.jsp</result>
+			<result name="goDmjsjcbgHysydt2" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_hysydt2.jsp</result>
+			<result name="goDmjsjcbgHysydt3" >/jsp/seasProfession/jsp/hysydt/tjfx/tjfx_dmjsjcbg_hysydt3.jsp</result>
+			
+			
+			
+		</action>
+	</package>
+</struts>

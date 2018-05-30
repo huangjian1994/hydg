@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 消息提示 -->
+	<package name="messagePrompt" namespace="/messagePrompt" extends="struts-default">
+		<action name="messagePrompt_*" class="messagePromptAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			
+		</action>
+	</package>
+</struts>

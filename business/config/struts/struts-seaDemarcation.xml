@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 海域使用动态管理  海域勘界管理 -->
+	<package name="seaDemarcation" namespace="/seaDemarcation" extends="struts-default">
+		<action name="seaDemarcation_*" class="seaDemarcationAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			
+			<!-- 多媒体信息管理 -->
+			<result name="mediaIndex" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_media_index.jsp</result>
+			<result name="delSuccess" type="redirect">/seaDemarcation/seaDemarcation_fetchDmtxx.do</result>
+			
+			<result name="mediaDetail" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_media_detail.jsp</result>
+			<result name="mediaUpdate" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_media_update.jsp</result>
+			<result name="dmtxxZpDetail" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_media_zp_detail.jsp</result>
+			<result name="videoDetail" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_media_sp_detail.jsp</result>
+			
+			
+			
+			<!-- 下载附件 -->
+			<param name="fileName"></param>  
+			<result name="downLoadMediafj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileMediafj</param>
+		    </result>
+			
+			
+			<!-- 矢量数据管理 -->
+			<result name="slsjIndex" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_slsj_index.jsp</result>
+			<result name="delSlsjSuccess" type="redirect">/seaDemarcation/seaDemarcation_fetchSlsj.do</result>
+			<result name="slsjDetail" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_slsj_detail.jsp</result>
+			<result name="slsjUpdate" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_slsj_update.jsp</result>
+			<result name="goSlsjGszh" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_slsj_gszh.jsp</result>
+			<!-- 下载-->
+			<param name="fileName"></param>  
+			<result name="downLoadSlsj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileSlsj</param>
+		    </result>
+		    
+			<param name="fileName"></param>  
+			<result name="downLoadSlsj1" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileSlsj</param>
+		    </result>
+		    <param name="fileName"></param>  
+			<result name="downLoadSlsj2" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileSlsj</param>
+		    </result>
+		    <param name="fileName"></param>  
+			<result name="downLoadSlsj3" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileSlsj</param>
+		    </result>
+		    <param name="fileName"></param>  
+			<result name="downLoadSlsj4" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileSlsj</param>
+		    </result>
+			
+			
+			
+			
+			
+			
+			<!-- 划界方案综合分析 -->
+			<result name="goHjfaIndex" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_hjfa_index.jsp</result>
+			<result name="addHjfaSuccess" type="redirect">/seaDemarcation/seaDemarcation_fetchHjfa.do</result>
+			<result name="hjfaDetail" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_hjfa_detail.jsp</result>
+			<result name="hjfaUpdate" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_hjfa_update.jsp</result>
+			<param name="fileName"></param>  
+			<result name="downLoadHjfafj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileHjfa</param>
+		    </result>
+			<result name="goHjfaTj" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_hjfa_tj.jsp</result>
+			
+			<param name="fileName"></param>  
+			<result name="downLoadHjfaJwd" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileHjfaJwd</param>
+		    </result>
+		    <result name="goHjfa" >/jsp/seasProfession/jsp/hysydt/hykj/hykj_hjfa.jsp</result>
+		    
+		</action>
+	</package>
+</struts>

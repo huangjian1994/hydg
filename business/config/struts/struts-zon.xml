@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="zon" namespace="/zon" extends="struts-default">
+		<action name="zon_*" class="zonAction" method="{1}" >
+		
+			<result name="gnqhJsp" >/jsp/seasProfession/jsp/oceanFunctionalZoning/qhgl_xxgl.jsp</result>
+			<result name="gognquIndex" type="redirect">/zon/zon_fetchGnqh.do</result>
+		<!-- 项目详细信息 -->
+			<result name="gnqhDetail" >/jsp/seasProfession/jsp/oceanFunctionalZoning/xq.jsp</result>
+
+		<!-- 新增项目，成功后显示基本信息 -->
+			<result name="goAddSuccess" type="redirect">/zon/zon_addGnqhSuccess.do?xmID=${xmID}</result>
+			<result name="addGnqhSuccess" >/jsp/seasProfession/jsp/oceanFunctionalZoning/xq2.jsp</result>
+			<result name="updategnqh" >/jsp/seasProfession/jsp/oceanFunctionalZoning/xq2.jsp</result>
+
+			<param name="fileName"></param>
+			<result name="downLoadGnqhJzdmb" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param>
+				<param name="inputName">downLoadFileGnqhJzdmb</param>
+			</result>
+
+			<!-- 海洋功能区辅助划分-->
+			<result name="fzhfJsp" >/jsp/seasProfession/jsp/oceanFunctionalZoning/qhgl_fzhf.jsp</result>
+			<result name="gofzhfIndex" type="redirect">/zon/zon_fetchFzhf.do</result>
+			<result name="fzgnqhDetail" >/jsp/seasProfession/jsp/oceanFunctionalZoning/fzhf_xq.jsp</result>
+
+			<!--新增辅助区划，成功后显示基本信息-->
+			<result name="goFzqhSuccess" type="redirect">/zon/zon_addFzqhSuccess.do?xmID=${xmID}</result>
+			<result name="addFzqhSuccess" >/jsp/seasProfession/jsp/oceanFunctionalZoning/fzhf_change.jsp</result>
+
+			<!--功能区划发布 -->
+			<result name="fbJsp" >/jsp/seasProfession/jsp/oceanFunctionalZoning/qhgl_fb.jsp</result>
+			<result name="fbDetaile">/jsp/seasProfession/jsp/oceanFunctionalZoning/fb_xq.jsp</result>
+			<result name="goFbIndex" type="redirect">/zon/zon_fetchFb.do</result>
+			<result name="amendFbJsp">/jsp/seasProfession/jsp/oceanFunctionalZoning/fb_change.jsp</result>
+
+			<!--利用与保护 -->
+			<result name="lybhIndex">/jsp/seasProfession/jsp/oceanFunctionalZoning/qhgl_lygz.jsp</result>
+			<result name="tolybhList" type="redirect">/zon/zon_fetchLybh.do</result>
+			<result name="toEditXzgz">/jsp/seasProfession/jsp/oceanFunctionalZoning/lygz_edit.jsp</result>
+			<result name="toaddxzgz">/jsp/seasProfession/jsp/oceanFunctionalZoning/lygz_edit.jsp</result>
+
+			<!-- 执行监督 -->
+			<result name="toaddzxjd">/jsp/seasProfession/jsp/oceanFunctionalZoning/zxqkjd_edit.jsp</result>
+			<result name="zxjdIndex">/jsp/seasProfession/jsp/oceanFunctionalZoning/zxqkjd_index.jsp</result>
+			<result name="tozxjdList" type="redirect">/zon/zon_fetchzxjd.do</result>
+            <result name="toEditzxjd">/jsp/seasProfession/jsp/oceanFunctionalZoning/zxqkjd_edit.jsp</result>
+
+
+		</action>
+	</package>
+</struts>

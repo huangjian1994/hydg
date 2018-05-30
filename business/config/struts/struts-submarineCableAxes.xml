@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 海域使用动态管理  统计分析 -->
+	<package name="sca" namespace="/sca" extends="struts-default">
+		<action name="sca_*" class="scaAction" method="{1}" >
+			<result name="test">/js/seabedPipeline/MyJsp.jsp</result>
+		</action>
+	</package>
+</struts>

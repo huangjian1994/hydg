@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 海域使用动态管理  用海项目信息管理、用海项目批后监管 -->
+	<package name="business" namespace="/business" extends="struts-default">
+		<action name="business_*" class="businessAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			<result name="yhxmJsp" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_index.jsp</result>
+			<result name="goXmxxIndex" type="redirect">/business/business_fetchYhxm.do</result>
+			<!-- 项目详情 -->
+			<result name="yhxmDetail" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_detail.jsp</result>
+			<result name="yhxmZhxxDetail" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_detail_zhxxD.jsp</result>
+			<result name="yhxmZhxxDetailZht" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_detail_zhxxD_zht.jsp</result>
+			
+			<!-- 项目基本信息 -->
+			<result name="goAddSuccess" type="redirect">/business/business_addYhxmSuccess.do?xmID=${xmID}</result>
+			<result name="addYhxmSuccess" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add1_xm.jsp</result>
+			
+			<!-- 项目附件 -->
+			<result name="addYhxmFj" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add2_fj.jsp</result>
+			<result name="goAddFjSuccess" type="redirect">/business/business_addYhxmFj.do?xmID=${xmID}&amp;xmfjID=${xmfjID}</result>
+			<!-- 下载项目附件 -->
+			<param name="fileName"></param>  
+			<result name="downLoadXmfj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileXmfj</param>
+		     </result>
+		     
+			<!-- 宗海信息 -->
+			<result name="goAddZhxxSuccess" type="redirect">/business/business_addYhxmZhxx.do?xmID=${xmID}</result>
+			<result name="addYhxmZhxx" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx.jsp</result>
+			
+			<result name="goAddZhxxSuccessS" type="redirect">/business/business_addYhxmZhxxSuccess.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			<result name="addYhxmZhxxS" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_s.jsp</result>
+			
+			<!-- 新增宗海 -->
+			<result name="goZhxxadd" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_a.jsp</result>
+			<result name="goZhxxUpdate" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u.jsp</result>
+			<!-- 用海方式 -->
+			<result name="goZhxxUpdate2" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u2.jsp</result>
+			<result name="addYhfsSuccess" type="redirect">/business/business_fetchYhfs.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			
+			<param name="fileName"></param>  
+			<result name="downLoadYhfsJzdmb" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileYhfsJzdmb</param>
+		     </result>
+			
+			<!-- 海域使用金 -->
+			<result name="goZhxxUpdate3" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u3.jsp</result>
+			<result name="saveHysyjSuccess" type="redirect">/business/business_fetchHysyj.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			<!-- 宗海图 -->
+			<result name="goZhxxUpdate4" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u4.jsp</result>
+			<result name="goAddZhtSuccess" type="redirect">/business/business_fetchZhtList.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			
+			
+			<!-- 申请材料 -->
+			<result name="goZhxxUpdate5" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u5.jsp</result>
+			<result name="goAddFjSuccess5" type="redirect">/business/business_fetchSqclList.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			
+			<!-- 地图定位 -->
+			<result name="goZhxxUpdate6" >/jsp/seasProfession/jsp/hysydt/yhxm/yhxm_add3_zhxx_u6.jsp</result>
+
+
+			
+			<!-- 海域使用动态管理——用海项目批后监管 -->
+			<result name="yhxmdtglIndex" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_index.jsp</result>
+			<result name="dtglJgList" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_jgList.jsp</result>
+			<result name="addJgxxSucess" type="redirect">/business/business_fetchXmDtjgList.do?xmID=${xmID}</result>
+			<result name="goJgxxUpdate" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_update.jsp</result>
+			<result name="goJgxxDetail" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_detail.jsp</result>
+			
+			<result name="goFetchJgxxAdd1" type="redirect">/business/business_fetchJgxxAdd1.do?xmID=${xmID}&amp;dtglID=${dtglID}</result>
+			<result name="goJgxxAdd1" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_add1.jsp</result>
+			<result name="goJgxxAdd2" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_add2.jsp</result>
+			<result name="goJgxxAdd3" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_add3.jsp</result>
+			<result name="addJgxxJcfwSuccess" type="redirect">/business/business_fetchJgxxJcfw.do?xmID=${xmID}&amp;dtglID=${dtglID}</result>
+			<result name="goAddXczpSuccess" type="redirect">/business/business_fetchJgxxJcfj.do?xmID=${xmID}&amp;dtglID=${dtglID}</result>
+			<result name="xczpDetail" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_xczp_detail.jsp</result>
+			<result name="videoDetail" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_dtgl_xcyx_detail.jsp</result>
+			
+			
+		
+		
+			<!-- 海域使用动态管理——用海项目变化预警 -->
+			<result name="phjgBhyjIndex" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_bhyj_index.jsp</result>
+			<result name="bhyjJgList" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_bhyj_jgList.jsp</result>
+			<result name="jgxxDetail" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_bhyj_jg_detail.jsp</result>
+			<result name="addYjxxSucess" type="redirect">/business/business_fetchYjxm.do</result>
+			
+			<result name="yjxxDetail" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_bhyj_detail.jsp</result>
+			<result name="yjxxUpdate" >/jsp/seasProfession/jsp/hysydt/phjg/phjg_bhyj_update.jsp</result>
+			
+			
+			
+		</action>
+	</package>
+</struts>

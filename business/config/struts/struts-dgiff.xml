@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 海域使用动态管理 海岸线管理 -->
+	<package name="dgiff" namespace="/dgiff" extends="struts-default">
+		<action name="dgiff_*" class="dgiffAction" method="{1}">
+			<!-- 基础信息管理 -->
+			<result name="haxjcxxInfoSuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl.jsp</result>
+			<result name="toAddHaxInfoSuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl_add.jsp</result>
+			<result name="saveHaxInfoSuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl.jsp</result>
+			<result name="saveHaxInfoSuc" type="redirect">/dgiff/dgiff_haxjcxxInfo.do</result>
+			<result name="searchHaxByEntitySuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl.jsp</result>
+			<result name="ToUpdateHaxJspSuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl_update.jsp</result>
+			<result name="saveUpdateHaxInfoSuc" type="redirect">/dgiff/dgiff_haxjcxxInfo.do</result>
+			<result name="deleteHaxInfoSuc" type="redirect">/dgiff/dgiff_haxjcxxInfo.do</result>
+			<result name="ToDetaileHaxJspSuc">/jsp/seasProfession/jsp/coastlineManagement/jcxxgl/jcxxgl_detail.jsp</result>
+			
+			<!-- 监视监测 -->
+			<result name="JsjcListViewSuc">/jsp/seasProfession/jsp/coastlineManagement/jsjcgl/jsjcgl_list.jsp</result>
+			<result name="toAddJsjcInfoSuc">/jsp/seasProfession/jsp/coastlineManagement/jsjcgl/jsjcgl_add.jsp</result>
+			<result name="saveJsjcInfoSuc" type="redirect">/dgiff/dgiff_JsjcListView.do</result>
+			<result name="ToUpdateJsjcJspSuc">/jsp/seasProfession/jsp/coastlineManagement/jsjcgl/jsjcgl_update.jsp</result>
+			<result name="ToDetaileJsjcJspSuc">/jsp/seasProfession/jsp/coastlineManagement/jsjcgl/jsjcgl_detail.jsp</result>
+			<result name="searchJsjcByEntitySuc">/jsp/seasProfession/jsp/coastlineManagement/jsjcgl/jsjcgl_list.jsp</result>
+			
+			<!-- 调查统计 -->
+			<result name="dctjListViewSuc">/jsp/seasProfession/jsp/coastlineManagement/dctj/dctj_list.jsp</result>
+			<result name="toAddDctjInfoSuc">/jsp/seasProfession/jsp/coastlineManagement/dctj/dctj_add.jsp</result>
+			<result name="ToDctjViewSuc" type="redirect">/dgiff/dgiff_dctjListView.do</result>
+			<result name="ToUpdateDctjJspSuc">/jsp/seasProfession/jsp/coastlineManagement/dctj/dctj_update.jsp</result>
+			<result name="ToDetaileDctjJspSuc">/jsp/seasProfession/jsp/coastlineManagement/dctj/dctj_detail.jsp</result>
+			<result name="searchDctjByEntitySuc">/jsp/seasProfession/jsp/coastlineManagement/dctj/dctj_list.jsp</result>
+			
+			<!-- 规划信息 -->
+			<result name="ghxxIndex">/jsp/seasProfession/jsp/coastlineManagement/ghxxgl/ghxxgl_index.jsp</result>
+			<result name="addGhxxSuccess" type="redirect">/dgiff/dgiff_fetchHaxGhxxList.do</result>
+			<result name="goGhxxDetail">/jsp/seasProfession/jsp/coastlineManagement/ghxxgl/ghxxgl_detail.jsp</result>
+			<result name="goGhxxUpdate">/jsp/seasProfession/jsp/coastlineManagement/ghxxgl/ghxxgl_update.jsp</result>
+			<!-- 下载附件 -->
+			<param name="fileName"></param>  
+			<result name="downLoadHaxfj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileHaxfj</param>
+		    </result>
+			
+			<!-- 整治修复 -->
+			<result name="zzxfIndex">/jsp/seasProfession/jsp/coastlineManagement/zzxf/zzxf_index.jsp</result>
+			<result name="addZzxfSuccess" type="redirect">/dgiff/dgiff_fetchHaxZzxfList.do</result>
+			<result name="goZzxfDetail">/jsp/seasProfession/jsp/coastlineManagement/zzxf/zzxf_detail.jsp</result>
+			<result name="goZzxfUpdate">/jsp/seasProfession/jsp/coastlineManagement/zzxf/zzxf_update.jsp</result>
+			<result name="toAddZzxfInfo">/jsp/seasProfession/jsp/coastlineManagement/zzxf/zzxf_add.jsp</result>
+			
+			<!-- 海岸线动态修订 -->
+			<param name="fileName"></param>  
+			<result name="downLoadHaxdtxdJwd" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileHaxdtxdJwd</param>
+		    </result>
+			<result name="goHaxdtxd" >/jsp/seasProfession/jsp/coastlineManagement/dtxdgl.jsp</result>
+			
+			
+		</action>
+	</package>
+</struts>

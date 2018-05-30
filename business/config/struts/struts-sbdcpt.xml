@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 内外部接口 市不动产平台接口 -->
+	<package name="sbdcpt" namespace="/sbdcpt" extends="struts-default">
+		<action name="sbdcpt_*" class="sbdcptAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			
+			<result name="sbdcptIndex" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_index.jsp</result>
+			<result name="goYhxmList" type="redirect">/sbdcpt/sbdcpt_fetchYhxmList.do</result>
+			
+			<result name="yhxmDetail" >/jsp/seasProfession/jsp/hysydt/yhxm/open_yhxm_detail.jsp</result>
+			<result name="yhxmZhxxDetail" >/jsp/seasProfession/jsp/hysydt/yhxm/open_yhxm_detail_zhxxD.jsp</result>
+			<result name="zhxxDetail" >/jsp/seasProfession/jsp/hysydt/yhxm/open_zhxx_detail.jsp</result>
+			
+			<result name="yhxmDetail2" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_yhxm_detail.jsp</result>
+			<result name="yhxmZhxxDetail2" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_yhxm_detail_zhxxD.jsp</result>
+			<result name="zhxxDetail2" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_zhxx_detail.jsp</result>
+			
+			<result name="sbdcptFkIndex" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_fk_index.jsp</result>
+			<result name="sbdcptFkDetail" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_fk_detail.jsp</result>
+			<result name="sbdcptFkBd" >/jsp/seasProfession/jsp/nwbjk/sbdcpt/sbdcpt_fk_bd.jsp</result>
+			<result name="goFkIndex" type="redirect">/sbdcpt/sbdcpt_fetchSbhcptFk.do</result>
+			
+		</action>
+	</package>
+</struts>

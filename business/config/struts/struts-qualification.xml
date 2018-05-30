@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 内外部接口 资质管理接口 -->
+	<package name="qualification" namespace="/qualification" extends="struts-default">
+		<action name="qualification_*" class="qualificationAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+			
+			<result name="qualificationList" >/jsp/seasProfession/jsp/nwbjk/zzgl/zzgl_index.jsp</result>
+			<result name="zzDetail" >/jsp/seasProfession/jsp/nwbjk/zzgl/zzgl_detail.jsp</result>
+			<result name="zzUpdate" >/jsp/seasProfession/jsp/nwbjk/zzgl/zzgl_update.jsp</result>
+			<result name="addSuccess" type="redirect">/qualification/qualification_fetchQualificationList.do</result>
+			
+			<result name="fjtpDetail" >/jsp/seasProfession/jsp/nwbjk/zzgl/zzgl_detail_tp.jsp</result>
+			<!-- 下载附件 -->
+			<param name="fileName"></param>  
+			<result name="downLoadFjwj" type="stream">
+		     	<param name="contentType">text/plain</param>  
+		     	<param name="contentDisposition">attachment;filename="${downloadChineseFile}"</param> 
+		     	<param name="inputName">downLoadFileFjwj</param>
+		    </result>
+			
+		</action>
+	</package>
+</struts>

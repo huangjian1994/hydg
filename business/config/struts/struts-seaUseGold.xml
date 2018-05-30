@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 海域使用动态管理  海域使用金征收管理 -->
+	<package name="seaUseGold" namespace="/seaUseGold" extends="struts-default">
+		<action name="seaUseGold_*" class="seaUseGoldAction" method="{1}" >
+			<result name="dlCs" >/jsp/chaoshi.jsp</result>
+		
+			<result name="hysjyIndex" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_index.jsp</result>
+			<result name="hysyjJnmx" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_jnmx.jsp</result>
+			<result name="goFetchHysyj" type="redirect">/seaUseGold/seaUseGold_fetchJnmx.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			
+			<result name="hysjyIndex2" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_index2.jsp</result>
+			<result name="hysyjJnmx2" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_jnmx2.jsp</result>
+			<result name="goHysyjJnmx2" type="redirect">/seaUseGold/seaUseGold_fetchJnmx22.do</result>
+			
+			<result name="hysjyIndex3" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_index3.jsp</result>
+			<result name="goHysjyIndex3" type="redirect">/seaUseGold/seaUseGold_fetchHysyjList3.do</result>
+			<result name="goHysyjJnmx31" type="redirect">/seaUseGold/seaUseGold_fetchJnmx31.do?xmID=${xmID}&amp;zsID=${zsID}</result>
+			<result name="goHysyjJnmx32" type="redirect">/seaUseGold/seaUseGold_fetchJnmx322.do</result>
+			<result name="hysyjJnmx31" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_jnmx31.jsp</result>
+			<result name="hysyjJnmx32" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_jnmx32.jsp</result>
+			
+			
+			<result name="goZsxxDetail" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_zsxx_detail.jsp</result>
+			<result name="goXmxxDetail" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzs_yhxm_detail.jsp</result>
+			
+		    <!-- 缴纳通知 -->
+		    <result name="syjzsJntzIndex" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_index.jsp</result>
+			<result name="addJntzSuccess" type="redirect">/seaUseGold/seaUseGold_fetchZhxxList.do</result>
+			<result name="jntzDetail" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_detail.jsp</result>
+			<result name="jntzUpdate" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_update.jsp</result>
+			<result name="jntzAdd" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_add.jsp</result>
+			<result name="syjzsJntzList" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_list.jsp</result>
+			<result name="JntzList" type="redirect">/seaUseGold/seaUseGold_fetchJnjlByXmid.do?xmID=${xmID}&amp;zsID=${zsID}&amp;zsbh=${zsbh}</result>
+
+			<result name="syjzsJntzIndex2" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsJntz_index2.jsp</result>
+			<result name="addJntzSuccess2" type="redirect">/seaUseGold/seaUseGold_fetchZhxxList2.do</result>
+			
+			<!-- 征收标准 -->
+			<result name="zsbzList" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsZsbz_list.jsp</result>
+			<result name="addZsbzSuccess" type="redirect">/seaUseGold/seaUseGold_fetchHysyjZsbz.do</result>
+			<result name="zsbzUpdate" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsZsbz_update.jsp</result>
+			<result name="zsbzDetail" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsZsbz_detail.jsp</result>
+			<result name="zsbzIndex" >/jsp/seasProfession/jsp/hysydt/syjzs/syjzsZsbz_index.jsp</result>
+			
+		    
+		</action>
+	</package>
+</struts>
