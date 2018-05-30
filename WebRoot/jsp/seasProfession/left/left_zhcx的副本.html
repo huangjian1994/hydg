@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <!--<link href="../css/style.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../css/left-nav.css"/>
+    <!--<link rel="stylesheet" type="text/css"-->
+    <!--href="http://31.16.10.77:80/arcgis_js_v314_api/library/3.20/3.20/dijit/themes/tundra/tundra.css"/>-->
+    <!--<link rel="stylesheet" type="text/css"-->
+    <!--href="http://31.16.10.77:80/arcgis_js_v314_api/library/3.20/3.20/esri/css/esri.css"/>-->
+    <style type="text/css">
+        #map {
+            position: absolute;
+            left: 187px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <!--<script type="text/Javascript" src="http://31.16.10.77:80/arcgis_js_v314_api/library/3.20/3.20/init.js"></script>-->
+    <script language="JavaScript" src="../js/jquery.js"></script>
+    <!--<script language="JavaScript" src="../js/bootstrap.min.js"></script>-->
+    <!--<script type="text/javascript">-->
+    <!--var map, graphicLayer;-->
+    <!--require(["esri/map",-->
+    <!--"esri/layers/ArcGISTiledMapServiceLayer", "dojo/dom",-->
+    <!--"dojo/domReady!"-->
+    <!--], function (Map,-->
+    <!--Tiled, dom) {-->
+    <!--map = new Map("map", {-->
+    <!--"logo": false,-->
+    <!--zoom: 4,-->
+    <!--maxZoom: 9-->
+    <!--});-->
+    <!--var tiled = new Tiled("http://31.16.1.101/ArcGIS/rest/services/shsw_JCDXT/MapServer");-->
+    <!--map.addLayer(tiled);-->
+    <!--});-->
+    <!--</script>-->
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+</head>
+
+<body>
+
+<div class="contain">
+    <div class="lefttop">
+        <span>图层控制</span>
+    </div>
+    <div class="leftmenu">
+        <div class="title">
+            <div class="layer">
+                <h2>
+                    <img class="jia-jian" src="../images/jia.png" alt="">
+                    <input type="checkbox" name="" id="" value=""/>
+                    <span>国家资源可视化</span>
+                </h2>
+                <div class="layer-items hidden">
+                    <h3>
+                        <img class="jia-jian" src="../images/jia.png" alt="">
+                        <input type="checkbox" name="" id="" value=""/>
+                        <span>低分影响2014年</span>
+                    </h3>
+                    <div class="layer-items-content hidden">
+                        <ul>
+                            <li>
+                                <h3>
+                                    <input type="checkbox" name="" id="" value=""/>
+                                    <span>国家资源可视化</span>
+                                </h3>
+
+                            </li>
+                            <li>
+                                <h3>
+                                    <input type="checkbox" name="" id="" value=""/>
+                                    <span>国家资源可视化</span>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <input type="checkbox" name="" id="" value=""/>
+                                    <span>国家资源可视化</span>
+                                </h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="panel-group" id="accordion">-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h4 class="panel-title">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化"-->
+            <!--style="vertical-align: middle;"/></span>-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">-->
+            <!--<span class="fl drop">国家资源可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseOne" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2014年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2013年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2010下半年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2010上半年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2008年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像2002年</li>-->
+            <!--<li><input type="radio" name="" id="" value=""/>低分影像1993年</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化" style="vertical-align: middle;"/></span>-->
+            <!--<h4 class="panel-title">-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">-->
+            <!--<span class="fl drop">海域动态可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseTwo" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>非透水构筑物</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>港池、蓄水等</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>海底电缆管道</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>建设填海造地</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>透水构筑物</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>污水达标排放</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>其他</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h4 class="panel-title">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化"-->
+            <!--style="vertical-align: middle;"/></span>-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">-->
+            <!--<span class="fl drop">海岛动态可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseThree" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>崇明岛</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>长兴岛</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>横沙岛</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>大金山岛（无居民岛）</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>小金山到（无居民岛）</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>浮山岛（无居民岛）</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>......（18个无居民岛）</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h4 class="panel-title">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化"-->
+            <!--style="vertical-align: middle;"/></span>-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">-->
+            <!--<span class="fl drop">海洋功能区划可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseFour" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>农渔业区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>工业与城镇用海区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>矿产与能源区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>旅游休闲娱乐区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>河口海洋保护区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>保留区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>特殊利用区</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>港口航运区</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h4 class="panel-title">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化"-->
+            <!--style="vertical-align: middle;"/></span>-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">-->
+            <!--<span class="fl drop">海域勘界可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseFive" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>省际勘界线</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>县际勘界线</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>12海里领海</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>海岸线</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>领海际线</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>中国领海基点</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h4 class="panel-title">-->
+            <!--<span><input type="checkbox" class="fl" value="国家资源可视化"-->
+            <!--style="vertical-align: middle;"/></span>-->
+            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">-->
+            <!--<span class="fl drop">海籍可视化</span>-->
+            <!--<span class="glyphicon glyphicon-chevron-down fr"></span>-->
+            <!--</a>-->
+            <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseSix" class="panel-collapse collapse">-->
+            <!--<div class="panel-body">-->
+            <!--<ul>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>已确权海域使用项目</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>临时用海项目</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>已注销填海造地项目</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>历史确权变更注销数据</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>正在申请海域使用审批项目</li>-->
+            <!--<li><input type="checkbox" name="" id="" value=""/>区域用海规划公共设施用海</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div id="map"></div>-->
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('#collapseOne').collapse('hide')
+    });
+    $(function () {
+        $('#collapseTwo').collapse('hide')
+    });
+    $(function () {
+        $('#collapseThree').collapse('hide')
+    });
+    $(function () {
+        $('#collapseFour').collapse('hide')
+    });
+    $(function () {
+        $('#collapseFive').collapse('hide')
+    });
+    $(function () {
+        $('#collapseSix').collapse('hide')
+    });
+    $(function () {
+        for (var i = 0; i < $("#accordion .glyphicon").length; i++) {
+            (function (indexI) {
+                $("#accordion .drop").eq(indexI).on("click", function () {
+                    if ($("#accordion .glyphicon").eq(indexI).attr("class") == "glyphicon glyphicon-chevron-down fr") {
+                        $("#accordion .glyphicon").eq(indexI).attr("class", "glyphicon glyphicon-chevron-up fr");
+                    } else {
+                        $("#accordion .glyphicon").eq(indexI).attr("class", "glyphicon glyphicon-chevron-down fr");
+                    }
+
+                })
+            })(i)
+        }
+        var isMenu = true;
+
+        $(".view-menu a").on("click", function () {
+            if (isMenu) {
+                $(".contain").css("display", "none");
+                $(".view-menu a span").attr("class", "glyphicon glyphicon-chevron-right");
+                $("#map").css("left", 0);
+                $(".view-menu").css("left", 0);
+                isMenu = false;
+            } else {
+                $(".contain").css("display", "block");
+                $(".view-menu a span").attr("class", "glyphicon glyphicon-chevron-left");
+                $("#map").css("left", "187px");
+                $(".view-menu").css("left", "187px");
+                isMenu = true;
+            }
+        })
+    });
+</script>
+
+</html>
