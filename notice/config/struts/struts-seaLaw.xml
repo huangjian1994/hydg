@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="seaLaw" namespace="/seaLaw" extends="struts-default">
+		<action name="law_*" class="seaLawAction" method="{1}" >
+		
+			<result name="lawList" >/jsp/xtgl/flfg/flfg_index.jsp</result>
+			<result name="editSeaLaw" >/jsp/xtgl/flfg/flfg_edit.jsp</result>
+			<result name="seaLawInfo" >/jsp/xtgl/flfg/flfg_edit.jsp</result>
+			<result name="toSeaLawList" type="redirect" >/seaLaw/law_loadLawPage.do</result>
+			<result name="downloadFile" type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${lawFileName}</param>
+			</result>
+		</action>
+	</package>
+</struts>
