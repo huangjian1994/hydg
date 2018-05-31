@@ -48,7 +48,7 @@ html,body{
 	z-index: 100;
 }
 .ctrol_button input{	
-	width: 105px;
+	width: 110px;
 	height: 40px;
 	white-space:normal;
 	background-color:white;
@@ -62,7 +62,7 @@ html,body{
 	z-index: 100;
 }
 .butter input{
-	width: 105px;
+	width: 110px;
 	height: 40px;
 	background-color:white;
 	outline:none;

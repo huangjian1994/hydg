@@ -184,6 +184,7 @@ public class StatusTrackAction extends BaseAction{
 //       /* SeawallPatrolFromWs spfw = new SeawallPatrolFromWs();
 //        spfw.setSt_eventsn("XB0420180004");*/
         if (null != spfw) {
+        	System.out.println(spfw.getSt_eventsn());
             flowMap = seawallPatrolService.loadFlowsByEventsn(spfw.getSt_eventsn());
         }
         try{
