@@ -136,6 +136,11 @@ public class PipelineSafetyAction extends BaseAction {
     private final static String downloadPath="C:/hydg/download/";
     private String tjsjType;
 
+    /**
+     * 展示船舶位置的经纬度
+     */
+    private String dtjd;
+    private String dtwd;
 
 
 
@@ -245,6 +250,8 @@ public class PipelineSafetyAction extends BaseAction {
     	 */
     public String fetchBoatxq(){
         System.out.println("预警船舶详情mmsi"+mmsid);
+        System.out.println("预警船舶经度"+dtjd);
+        System.out.println("预警船舶维度"+dtwd);
         String cmd1 = "0x0121";
         si = "{mmsi:\""+mmsid+"\"}";
         sicode = Base64Util.encode(si.getBytes());
@@ -998,5 +1005,21 @@ public class PipelineSafetyAction extends BaseAction {
 
     public void setTjsjType(String tjsjType) {
         this.tjsjType = tjsjType;
+    }
+
+    public String getDtjd() {
+        return dtjd;
+    }
+
+    public void setDtjd(String dtjd) {
+        this.dtjd = dtjd;
+    }
+
+    public String getDtwd() {
+        return dtwd;
+    }
+
+    public void setDtwd(String dtwd) {
+        this.dtwd = dtwd;
     }
 }

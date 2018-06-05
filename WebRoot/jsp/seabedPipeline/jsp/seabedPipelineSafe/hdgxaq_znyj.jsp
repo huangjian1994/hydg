@@ -44,8 +44,13 @@
 			    })
             });
             //查看详情，包括静态数据，船舶档案
-            function xq(mmsid){
+            function xq(mmsid,dtjd,dtwd){
                 document.getElementById("mmsid").value = mmsid;
+                alert(dtjd);
+                alert(dtwd);
+
+                document.getElementById("dtjd").value = dtjd;
+                document.getElementById("dtwd").value = dtwd;
                 document.pip.action="${contextPath}/pip/pip_fetchBoatxq.do";
                 document.pip.target="_self";
                 document.pip.submit();
@@ -108,8 +113,8 @@
 				<div id="usual1" class="usual">
 					<div class="itab" >
 						<ul>
-							<li><a href="#tab1" >违规船舶信息记录</a></li>
-							<li><a href="#tab2" class="selected">船舶位置</a></li>
+							<li><a href="#tab1" class="selected">违规船舶信息记录</a></li>
+							<li><a href="#tab2" >船舶位置</a></li>
 						</ul>
 					</div>
 					<div class="tabscont" >
@@ -117,6 +122,8 @@
 							<div class="main">
 								<s:form name="pip" namespace="/pip" action="pip_fetchWgcb.do" method="post" >
 									<input name="mmsid" id="mmsid" value="" type="hidden" />
+									<input name="dtjd" id="dtjd" value="" type="hidden" />
+									<input name="dtwd" id="dtwd" value="" type="hidden" />
 									<div class="listtitle3">
 										<img src="${contextPath}/images/seasProfession/ico06.png" width="25" height="25" />条件查询
 									</div>
@@ -161,7 +168,7 @@
 									<c:forEach items="${wgcbList}" var="w" varStatus="j">
 										<tr>
 											<td>${j.count}</td>
-											<td><a href="javascript:void(0)" onclick="xq('${w.mmsi}')" class="tablelink">${w.mmsi}</a></td>
+											<td><a href="javascript:void(0)" onclick="xq('${w.mmsi}','${w.longitude}','${w.latitude}')" class="tablelink">${w.mmsi}</a></td>
 											<td>${w.sog}</td>
 											<td>${w.longitude}</td>
 											<td>${w.latitude}</td>
