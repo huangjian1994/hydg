@@ -29,11 +29,11 @@ require([
 
     var yewuUrl = "http://31.16.1.101/arcgis/rest/services/shsw_HYJCXX/MapServer";
     var yewuLayers = new ArcGISDynamicMapServiceLayer(yewuUrl);
-    var visibleId = [16, 36]; //海底管线、公共航道
+    var visibleId = [36]; //海底管线、公共航道
     yewuLayers.setVisibleLayers(visibleId);
     
-    var LineinfoLayer = new GraphicsLayer();
     var pipeLineLayer = new GraphicsLayer();
+    var blLineLayer = new GraphicsLayer();
     var map = new Map("map", {
         logo: false,
         zoom: 1,
@@ -47,90 +47,89 @@ require([
     });
     map.addLayer(tiled); //底图
     map.on("load", function() {
-//        var mapCenter = new Point(80000, -40000, map.spatialReference);
-//        map.centerAt(mapCenter);
+        var mapCenter = new Point(80000, -40000, map.spatialReference);
+        map.centerAt(mapCenter);
         $('body').addClass('loaded');
         $('#loader-wrapper .load_title').remove();
         map.addLayer(yewuLayers);
         map.addLayer(pipeLineLayer);
-        map.addLayer(LineinfoLayer);
+        map.addLayer(blLineLayer);
         searchLine();
+        searchbl();
     });
-    map.on("Click", mapSearch);
-
-    function mapSearch(evt) { //地图点击查询
-        var identifyTask = new IdentifyTask(yewuUrl);
-        var params = new IdentifyParameters();
-        params.tolerance = 3;
-        params.returnGeometry = true;
-        params.layerIds = [16];
-        params.layerOption = IdentifyParameters.LAYER_OPTION_ALL;
-        params.width = map.width;
-        params.height = map.height;
-        params.geometry = evt.mapPoint;;
-        params.mapExtent = map.extent;
-        identifyTask.execute(params, showMap);
-    }
-
-    function showMap(res) { //点击显示信息
-        if (res.length > 0) {
-        	LineinfoLayer.clear();
-            var result = res[0];
-            var geo = result.feature.geometry;
-            var attrs = result.feature.attributes;
-            var symbol = new SimpleLineSymbol(
-                esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                new dojo.Color([200, 200, 0]),
-                5
-            );
-            var attr = {
-                "名称": attrs.名称,
-                "LENGTH": attrs.LENGTH,
-                "OBJECTID": attrs.OBJECTID,
-                "OUTPUT84_": attrs.OUTPUT84_,
-                "OUTPUT84_I": attrs.OUTPUT84_I,
-                "光缆类别": attrs.光缆类别
-            };
-            var infoTemplate = new InfoTemplate("名称：${名称}",
-                "OBJECTID：${OBJECTID}<br>长度：${LENGTH}米" +
-                "<br>OUTPUT84_：${OUTPUT84_}<br>OUTPUT84_I:${OUTPUT84_I}<br>光缆类别:${光缆类别}");
-            var line = new Graphic(geo, symbol, attr, infoTemplate);
-            LineinfoLayer.add(line);
-        }else{
-        	LineinfoLayer.clear();
-        }
-    }
-    doSearch = function() { //查询框查询
-        var tj = $(".search-input").val();
-        var queryTask = new QueryTask(yewuUrl + '/' + 16);
+    
+    var symbol1 = new SimpleLineSymbol(
+            esri.symbol.SimpleLineSymbol.STYLE_DASH,
+            new dojo.Color([200, 200, 0]),
+            5
+        );
+    var symbol2 = new SimpleLineSymbol(
+            esri.symbol.SimpleLineSymbol.STYLE_DASH,
+            new dojo.Color([200, 0, 0]),
+            5
+        );
+    function searchLine(){
+    	var queryTask = new QueryTask(yewuUrl+"/16");
         var query = new Query();
-        query.where = "名称 LIKE '%" + tj + "%'";
+        query.where = "OBJECTID >= 0 ";
         query.outFields = ["*"];
         query.returnGeometry = true;
-        queryTask.execute(query, showQuery);
+        queryTask.execute(query,function(res){
+        	for(var i = 0;i<res.features.length;i++){
+        		var line = res.features[i];
+        		var infoTemplate = new InfoTemplate("名称：${名称}",
+                        "OBJECTID：${OBJECTID}<br>长度：${LENGTH}米" +
+                        "<br>OUTPUT84_：${OUTPUT84_}<br>OUTPUT84_I:${OUTPUT84_I}<br>光缆类别:${光缆类别}");
+        		line.setSymbol(symbol1);
+        		line.setInfoTemplate(infoTemplate);
+        		pipeLineLayer.add(line);
+        	}
+        });     
+    }
+    
+    doSearch = function() { //查询框查询
+        var tj = $(".search-input").val();
+        var results = [];
+        for(var i = 0;i<pipeLineLayer.graphics.length;i++){
+        	var attribute = pipeLineLayer.graphics[i].attributes;
+        	if(attribute.名称.indexOf(tj) > 0){
+        		results.push(pipeLineLayer.graphics[i]);
+        	}
+        }
+        showQuery(results);
     }
 
     function showQuery(res) { //显示查询结果
         $(".result-container").empty();
-        if (!res.features.length) {
+        if (!res.length) {
             alert("结果不存在");
         } else {
-            var result = res.features;
             var table = document.createElement("table");
             table.style.whiteSpace = "nowrap";
             table.className = "tablelist";
             var thead = document.createElement("thead");
             var tbody = document.createElement("tbody");
             var tr = document.createElement("tr");
-            $.each(res.features[1].attributes, function(key, val) {
+            $.each(res[0].attributes, function(key, val) {
                 var th = document.createElement("th");
                 th.innerHTML = key;
                 th.style.padding = "1px 5px";
                 tr.append(th);
             })
-            $.each(res.features, function() {
+            $.each(res, function() {
                 var tr = document.createElement("tr");
+                tr.lineid = this.attributes.OBJECTID;
                 tr.style.backgroundColor = "#fff";
+                tr.onclick = function(){
+                	for(var i = 0;i<pipeLineLayer.graphics.length;i++){
+                    	var attribute = pipeLineLayer.graphics[i].attributes;
+                    	if(attribute.OBJECTID == this.lineid){
+                    		pipeLineLayer.graphics[i].setSymbol(symbol2);
+                    	}else{
+                    		pipeLineLayer.graphics[i].setSymbol(symbol1);
+                    	}
+                    }
+                }
                 $.each(this.attributes, function(key, val) {
                     var td = document.createElement("td");
                     td.innerHTML = val;
@@ -144,20 +143,16 @@ require([
             $('.result-container').fadeIn(100);
         }
     }
-
-    function showLine(geo) { //显示所选line,infoTemplate可为null
-        var symbol = new SimpleLineSymbol(
-            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-            new dojo.Color([200, 200, 0]),
-            5
-        );
-        var line = new Graphic(geo, symbol);
-        LineinfoLayer.add(line);
+    changeSym = function(){
+    	for(var i = 0;i<pipeLineLayer.graphics.length;i++){
+    		pipeLineLayer.graphics[i].setSymbol(symbol1);
+        }
     }
-/*********查询数据库显示************/
-    var bls = ["SMW3","APCN2S3","APCN2S4","APG S3","TPES1S","TPES4"];
-    function searchLine(){
-    	for(var i = 0;i<bls.length;i++){
+    
+    
+    function searchbl(){
+    	var bls = ["SMW3","APCN2S3","APCN2S4","APG S3","TPES1S","TPES4"];
+        for(var i = 0;i<bls.length;i++){
     		var type = bls[i];
     		bldata(type);
     	}
@@ -213,7 +208,7 @@ require([
     		var con = [xx,yy];
     		path.push(con);
     	}
-		var symbol = new SimpleLineSymbol(
+		var symbolbl = new SimpleLineSymbol(
       			esri.symbol.SimpleLineSymbol.STYLE_SOLID,  // 样式,STYLE_DASH(破折号),STYLE_DASHDOT(点划线),STYLE_DASHDOTDOT,STYLE_DOT(点),STYLE_NULL,STYLE_SOLID(实线)
                 new dojo.Color([0,200,0]),  // 颜色  
                 3   // 像素  
@@ -223,12 +218,13 @@ require([
 				"建设时间：${time}<br/>所有者：${owner}");
 		var linejson={"geometry":{"paths":[path],
 			    "spatialReference":map.spatialReference}};
-		var pipeline = new Graphic(linejson);
-		pipeline.setSymbol(symbol);
-		pipeline.setAttributes(attr);
-		pipeline.setInfoTemplate(template);
-    	pipeLineLayer.add(pipeline);
+		var blline = new Graphic(linejson);
+		blline.setSymbol(symbolbl);
+		blline.setAttributes(attr);
+		blline.setInfoTemplate(template);
+		blLineLayer.add(blline);
     }
+    
 });
 function math(Aa, Bb){
     var a = 6378245.0; //'椭球体长半轴				 

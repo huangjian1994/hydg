@@ -160,5 +160,17 @@ public class PiplineSafetyDaoImpl extends BaseDAOImpl<Object, Serializable> impl
         return null;
     }
 
+    /**
+     *Description :查询所有的违规船舶
+     *@return List
+     *@author：hj
+     *@Create 2018-6-11 17:02
+     */
+    @Override
+    public List<ThysyywWgcbEntity> fetchWgcbAll() {
+        String hql = new String(" from ThysyywWgcbEntity w where 1 =1 order by w.addtime desc");
+        return this.findByJPQL(hql,null);
+    }
+
 
 }

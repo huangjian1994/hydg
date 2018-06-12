@@ -292,7 +292,7 @@ require([
      * 查询功能
      * 
      */
-    //鼠标经过显示信息		
+    //鼠标点击显示信息		
     var mapinfo = map.on("click", function(evt) {
         shownum = 'showwindow';
         queryToMap(evt.mapPoint, shownum);
@@ -311,7 +311,7 @@ require([
             queryToMap(evt.geometry, shownum);
         });
     }
-    queryToMap = function(querygeo, shownum) {
+    queryToMap = function(querygeo, shownum) {//通过地图点位置查询
         var identifyTask = new IdentifyTask(yewuUrl);
         var params = new IdentifyParameters();
         params.tolerance = 3;
@@ -379,13 +379,19 @@ require([
     function showWin(res, querygeo) {
         console.log(res);
         if (res.length > 0) {
-            var names;
+            var names = "";
             for (var i = 0; i < res.length; i++) {
-                var names = res[0].value;
-                if (i == 0) {
-                    continue;
+                if (res[i].名称) {
+                	names = names + res[i].名称 + "<br>";
+                } else if (res[i].标准化名称) {
+                	names = names + res[i].标准化名称 + "<br>";
+                } else if (res[i].公共用海名称) {
+                	names = names + res[i].公共用海名称 + "<br>";
+                } else if (res[i].项目名称) {
+                	names = names + res[i].项目名称 + "<br>";
+                } else {
+                	names = names + res[i].value + "<br>";
                 }
-                names = names + '<br>' + res[i].value;
             }
             console.log(names);
             map.infoWindow.setTitle("匹配地理信息");

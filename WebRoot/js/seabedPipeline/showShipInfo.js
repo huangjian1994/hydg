@@ -85,11 +85,14 @@ require([
      *画图查询 
      * 
      */
+    var toolbar = new Draw(map);
     queryNow = function(btn) { //区域实时
+    	toolbar.deactivate();
         drawToquery(btn.value);
         querytype = "Now";
     }
     queryHistory = function(btn) { //区域历史
+    	toolbar.deactivate();
         drawToquery(btn.value);
         querytype = "History";
     }
@@ -241,19 +244,21 @@ require([
                     "<br>船舶所有人:${Owner}<br>船舶经营人:${Operator}" +
                     "<br><button value=${MMSI} onclick='reHistory(this)'>历史轨迹</button>");
     	}
-    	if(shipfile == null && destina != null)
+    	if(shipfile == null && destina != null){
             var infoTemplate = new InfoTemplate("船名： ${Name}",
                 "吃水:${draft}分米" +
                 "<br>下一个目的港:${Destination}<br>预计到港时间:${ETA}" +
                 "<br><button value=${MMSI} onclick='reHistory(this)'>历史轨迹</button>");
             graphic.setAttributes(attr);
             graphic.setInfoTemplate(infoTemplate);
+    	}
     }
 });
 /*
  * 查询方法
  */
 function getInfo(urlNum, data) {
+//	console.log(data);
     var url = getURL(urlNum);
     $.ajax({
         async: false,

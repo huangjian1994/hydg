@@ -1,6 +1,7 @@
 package com.htcf.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.htcf.entity.*;
 import com.htcf.service.HdgxDbldxxService;
 import com.htcf.service.IBusinessService;
@@ -142,6 +143,11 @@ public class PipelineSafetyAction extends BaseAction {
     private String dtjd;
     private String dtwd;
 
+    /**
+     * 所有违规船舶集合
+     */
+    private List<ThysyywWgcbEntity> wgcbListAll;
+
 
 
     public  String areaQuery() {
@@ -212,6 +218,33 @@ public class PipelineSafetyAction extends BaseAction {
         pageBean.setPageRecord(10);
         wgcbList = safetyService.fetchWgcb(wgcbEntity,pageBean);
         return "znyjJsp";
+
+    }
+
+    /**
+     *
+     Description :违规船舶查询
+
+     @return 查询页面
+     @author：hj
+     @Create 2017-12-21 15:28
+     */
+    public void fetchWgcbAll(){
+        HttpServletRequest request= this.getHttpServletRequest();
+        wgcbListAll = safetyService.fetchWgcbAll();
+        String wgcbAll = JSON.toJSONString(wgcbListAll);
+        System.out.println(wgcbAll);
+        HttpServletResponse response = this.getHttpServletResponse();
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.print(wgcbAll);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -1021,5 +1054,13 @@ public class PipelineSafetyAction extends BaseAction {
 
     public void setDtwd(String dtwd) {
         this.dtwd = dtwd;
+    }
+
+    public List<ThysyywWgcbEntity> getWgcbListAll() {
+        return wgcbListAll;
+    }
+
+    public void setWgcbListAll(List<ThysyywWgcbEntity> wgcbListAll) {
+        this.wgcbListAll = wgcbListAll;
     }
 }

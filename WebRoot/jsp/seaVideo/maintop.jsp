@@ -86,12 +86,12 @@
 						<h2>智能视频分析</h2>
 					</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="${contextPath}/jsp/seaVideo/bottom/bottom_spjshtxt.jsp" target="bottomFrame">
 						<img src="${contextPath}/images/main/29.png" title="后台系统" />
 						<h2>视频监控后台</h2>
 					</a>
-				</li>
+				</li>-->
 
 			</ul>
 

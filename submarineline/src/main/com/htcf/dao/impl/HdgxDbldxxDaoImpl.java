@@ -75,12 +75,14 @@ public class HdgxDbldxxDaoImpl extends BaseDAOImpl<Object,Serializable> implemen
      */
     @Override
     public List<HdgxDbldxxEntity> fetchDbldByTime(String startTime, String endTime) {
-        StringBuilder hql = new StringBuilder("from HdgxDbldxxEntity d where d.addtime" +
-                " between :startTime and :endTime");
+        StringBuilder hql = new StringBuilder("from HdgxDbldxxEntity d "+
+                "where d.deipTime between :startTime and :endTime"
+                );
         Map<String,Object> args = new HashMap<String, Object>(16);
         args.put("startTime",startTime);
         args.put("endTime",endTime);
-        hql.append(" order by d.addtime desc");
+        hql.append(" order by d.deipTime desc");
         return this.findByJPQL(hql.toString(),args);
     }
+
 }

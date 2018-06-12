@@ -316,14 +316,14 @@
 											</a>
 										</li>
 									</c:if>
-									<c:if test="${r.code=='spjshtxt' }">
+									<!--<c:if test="${r.code=='spjshtxt' }">
 										<li>
 											<a href="${contextPath}/jsp/seaVideo/main3.jsp">
 												<img src="${contextPath}/images/homepage/16.png">
 												<p>视频监视后台系统</p>
 											</a>
 										</li>
-									</c:if>                                    
+									</c:if> -->                                   
 								</c:forEach>
 								<li>
 									<a href="${contextPath}/seaRecord/seaRecord_znspfx_maintop.do">

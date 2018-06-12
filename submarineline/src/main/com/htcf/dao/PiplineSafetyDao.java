@@ -71,4 +71,12 @@ public interface PiplineSafetyDao {
      @Create 2018-1-22 16:12
      */
     List<Object[]> tjGxmc(String bTime,String eTime);
+
+    /**
+     *Description :查询所有的违规船舶
+     *@return List
+     *@author：hj
+     *@Create 2018-6-11 17:02
+     */
+    List<ThysyywWgcbEntity> fetchWgcbAll();
 }

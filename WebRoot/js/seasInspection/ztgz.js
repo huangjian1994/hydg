@@ -138,10 +138,11 @@ init = function(jsonArr){
 		       	   map.infoWindow.resize(290, 300);
 		       	   map.infoWindow.show(event.mapPoint, map.getInfoWindowAnchor(graphic.geometry));
 		       }
-		       function hideInfo(graphic){
+		       function hideInfo(){
 		    	   map.infoWindow.hide();
 		       }
 		       showSpfw = function(btn){
+		    	   hideInfo();
 		    	   var eventsn =  btn.value;
 		    	   var state = $(btn).attr("state");
 		    	   var data = {"spfw.st_eventsn" : eventsn};
