@@ -179,7 +179,7 @@ body {padding: 0px; margin:0px; background:url(../img/image.jpg) ; background-po
     top: 10px;
 }
 .search-wrapper .result-container {
-    width: 100%;
+    max-height:400px;
     position: absolute;
     top:80px;
     left:0px;
@@ -188,6 +188,7 @@ body {padding: 0px; margin:0px; background:url(../img/image.jpg) ; background-po
     font-size: 14px;
     display:none;
     color:#B7B7B7;
+    overflow-y:auto;
 }
 
 

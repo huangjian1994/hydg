@@ -11,7 +11,8 @@ require([
     "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters",
     "esri/symbols/SimpleLineSymbol","esri/symbols/SimpleFillSymbol","esri/Color",
     "esri/symbols/PictureMarkerSymbol",
-    "esri/geometry/Point","esri/graphic","esri/layers/GraphicsLayer"
+    "esri/geometry/Point","esri/graphic","esri/layers/GraphicsLayer",
+    "esri/InfoTemplate"
 ],function(
 	Map,Extent,
 	Tiled,ArcGISDynamicMapServiceLayer,
@@ -20,11 +21,9 @@ require([
     IdentifyTask, IdentifyParameters,
     SimpleLineSymbol,SimpleFillSymbol,Color,
     PictureMarkerSymbol,
-    Point,Graphic,GraphicsLayer
+    Point,Graphic,GraphicsLayer,
+    InfoTemplate
 ){
-//	esriConfig.defaults.io.proxyUrl = "http://localhost/DotNet/proxy.ashx";
-//	esri.config.defaults.io.corsDetection=false;
-//	esri.config.defaults.io._processedCorsServers["http://31.16.1.101/arcgis/rest/services"]=1;
 	
 	var tiled = new Tiled("http://31.16.1.101/arcgis/rest/services/shsw_JCDXT2016/MapServer");
     var yewuUrl = "http://31.16.1.101/arcgis/rest/services/shsw_HYJCXX/MapServer";   
@@ -35,37 +34,89 @@ require([
 		slider: false
 	});
 	map.addLayer(tiled); //底图
-    var drawLayer = new GraphicsLayer();
-    map.addLayer(drawLayer);//海底管线图层
+    var pipeLayer = new GraphicsLayer();
+    map.addLayer(pipeLayer);//海底管线图层
     var bufferLayer = new GraphicsLayer();
     map.addLayer(bufferLayer);//buffer图层
     var shipLayer = new GraphicsLayer();
     map.addLayer(shipLayer);//ship图层
+    var videoLayer = new GraphicsLayer();
+    map.addLayer(videoLayer);//video图层
+    
+    var Sym_PIPE = new SimpleLineSymbol(
+            esri.symbol.SimpleLineSymbol.STYLE_DASH,
+            new dojo.Color([0, 0, 0]),
+            1
+        );
+    var Sym_Slect = new SimpleLineSymbol(
+            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+            new dojo.Color([0, 0, 255]),
+            5
+        );
+    var select = 0;//选中状态
     /*********加载金山岛视频点***********/
-    loadPoint();
     function loadPoint(){
-        var symbol = new PictureMarkerSymbol('../../../../images/video.png', 50, 50);
+        var symbol = new PictureMarkerSymbol('../../../hydg/images/video.png', 50, 50);
+        var infoTemplate = new InfoTemplate("船名","${name}");
         //大金山岛1
         var point1 = new Point(-4447.367940562527,-60446.668133655985,map.spatialReference);
-        var attr1 = {num:'1000056$1$0$0'};
-        var graphic1 = new Graphic(point1,symbol,attr1,null);
-        graLayer.add(graphic1);
+        var attr1 = {name:"大金山岛1",num:'1000056$1$0$0'};
+        var graphic1 = new Graphic(point1,symbol,attr1,infoTemplate);
+        videoLayer.add(graphic1);
         //大金山岛2
         var point2 = new Point(-4518.805583437813,-60269.39694578027,map.spatialReference);
-        var attr2 = {num:'1000055$1$0$0'};
-        var graphic2 = new Graphic(point2,symbol,attr2,null);
-        graLayer.add(graphic2);
+        var attr2 = {name:"大金山岛2",num:'1000055$1$0$0'};
+        var graphic2 = new Graphic(point2,symbol,attr2,infoTemplate);
+        videoLayer.add(graphic2);
     }
-
 
 	tiled.on("load",function(){		
 		$('body').addClass('loaded');
         $('#loader-wrapper .load_title').remove();
-        loadTiaoJ();
+        searchLine();
+        loadPoint();
 	});
+	map.on("click",function(){
+		if(select == 1){
+			var pipes = pipeLayer.graphics;
+	    	for(var i = 0;i<pipes.length;i++){
+	    		var pipe = pipes[i];
+	    		pipe.setSymbol(Sym_PIPE);
+	    		select = 0;
+	    	}
+		}
+	});
+	reloadpipe = function(){
+		pipeLayer.clear();
+		searchLine();
+		$(".menuList").empty();
+	}
 /*********加载初始预警条件**********/
     var geoserver = new GeometryService("http://31.16.1.101/arcgis/rest/services/Utilities/Geometry/GeometryServer");
-  //读取预警条件的数据库
+
+    //加载管线
+    function searchLine(){
+    	var queryTask = new QueryTask(yewuUrl+"/16");
+        var query = new Query();
+        query.where = "OBJECTID >= 0 ";
+        query.outFields = ["*"];
+        query.returnGeometry = true;
+        queryTask.execute(query,function(res){
+        	for(var i = 0;i<res.features.length;i++){
+        		var line = res.features[i];
+        		var infoTemplate = new InfoTemplate("名称：${名称}",
+                        "OBJECTID：${OBJECTID}<br>长度：${LENGTH}米" +
+                        "<br>OUTPUT84_：${OUTPUT84_}<br>OUTPUT84_I:${OUTPUT84_I}<br>光缆类别:${光缆类别}");
+        		line.setSymbol(Sym_PIPE);
+        		line.setInfoTemplate(infoTemplate);
+        		pipeLayer.add(line);
+        	}
+        	//按照管线id查询对应预警条件
+        	loadTiaoJ();
+        });     
+    }
+    
+    //读取预警条件的数据库
     function loadTiaoJ(){
     	$.ajax({
             async: false,
@@ -75,139 +126,106 @@ require([
             cache: false,
             success: function(json) {
                 infos = eval("["+json+"]");
-                gxyjtj = infos[0].gxyjtjEntities;
-                var snum = 0;
-                analysisTJ(snum);
+                tjs = infos[0].gxyjtjEntities;
+                analysisTJ(tjs);
             }
         });
     }
-  //逐条分析条件
-    function analysisTJ(snum){
-    	if(snum <= 27){
-    		var pipeinfo = gxyjtj[snum];
-    		loadData(pipeinfo,snum);
-    	}
-    	if(snum == 28){
-    		searchShip();//管线加载完成查询船舶
+    //逐条分析管线
+    function analysisTJ(tjs){
+    	var pipes = pipeLayer.graphics;
+    	for(var i = 0;i < pipes.length;i++){
+    		var pipe = pipes[i];
+    		var objid = pipe.attributes.OBJECTID
+    		for(var j = 0;j < tjs.length;j++){
+    			var pipelineid = tjs[j].piplineid;
+    			var sqlid = tjs[j].id;
+    			if(pipelineid == objid){
+    				loadMenu(pipe,tjs[j]);
+    				lineBuffer(pipe,tjs[j]);
+    				break;
+    			}
+    		}
     	}
     }
-    function loadData(pipeinfo,snum){
-    	var piplineid = pipeinfo.piplineid;
-		var sqlid = pipeinfo.id;
-		var distance = pipeinfo.distance;
-    	//按管线piplineid查询
-    	searchLine();  
-    	function searchLine(){
-        	var queryTask = new QueryTask(yewuUrl+"/16");
-            var query = new Query();
-            query.where = "OBJECTID =" + piplineid;
-            query.outFields = ["*"];
-            query.returnGeometry = true;
-            queryTask.execute(query,function(res){
-            	if(res.features.length > 0){
-            		showPipe(res.features[0]);
-            	}
-            });
-    	}
-    	//查询有结果则展示管线
-		function showPipe(feature){
-			var symbol = new SimpleLineSymbol(
-	                esri.symbol.SimpleLineSymbol.STYLE_DASHDOT,
-	                new dojo.Color([0, 0, 0]),
-	                2
-	            );
-	    	var geo = feature.geometry;
-	    	var attr = $.extend(feature.attributes,pipeinfo);
-	    	var linegra = new Graphic(geo,symbol,attr,null);
-	    	map.graphics.add(linegra);
-	    	loadMenu(feature);//填充menu
-	    	lineBuffer(feature,distance);
-		}
-		//根据查询到的管线信息填充menu
-        function loadMenu(feature){
-        	var listObj = feature.attributes;
-        	var linegeo = feature.geometry;
-        	var li = document.createElement("li");
-        	$(li).attr("objId",listObj.OBJECTID);
-        	$(li).attr("name",listObj.名称);
-        	$(li).attr("sqlid",sqlid);
-        	//获取 OBJECTID
-        	li.onclick = function(){
-                $(".seabedSet").show();
-                $("#object").val($(this).attr("objId"));
-        		$(".menuList li").removeClass("active");
-        		$(this).addClass("active");
-        		listId = $(this).attr("objId");
-        		listName = $(this).attr("name");
-        		listSqlid = $(this).attr("sqlid");
-        		selectLine(linegeo);//选择管线
-        	}
-        	var a = document.createElement("a");
-        	a.herf = "#";
-        	a.innerHTML = listObj.名称;        	
-        	li.appendChild(a);       	
-        	$(".menuList").append(li);
+   
+	//根据查询到的管线信息填充menu
+    function loadMenu(pipe,tj){
+    	var listObj = pipe.attributes;
+        var linegeo = pipe.geometry;
+        
+        var li = document.createElement("li");
+        $(li).attr("objId",listObj.OBJECTID);
+        $(li).attr("name",listObj.名称);
+        $(li).attr("sqlid",tj.id);
+        $(li).attr("distance",tj.distance);
+        $(li).attr("linesog1",tj.soglevel1);
+        $(li).attr("linesog2",tj.soglevel2);
+        $(li).attr("linesog3",tj.soglevel3);
+        //获取 OBJECTID
+        li.onclick = function(){
+        	$(".seabedSet").show();
+            $("#object").val($(this).attr("objId"));
+            $("#distance").val($(this).attr("distance"));
+            $("#linesog1").val($(this).attr("linesog1"));
+            $("#linesog2").val($(this).attr("linesog2"));
+            $("#linesog3").val($(this).attr("linesog3"));
+        	$(".menuList li").removeClass("active");
+        	$(this).addClass("active");
+        	listId = $(this).attr("objId");	
+        	listName = $(this).attr("name");
+        	listSqlid = $(this).attr("sqlid");
+        	selectLine($(this).attr("objId"));//选择管线
         }
-        //生成buffer参数params
-    	function lineBuffer(feature,distance){
-    		var buffergeo = feature.geometry;
-        	var params = new BufferParameters();
-        	params.geometries = [buffergeo];
-        	params.distances = [distance];
-        	params.outSpatialReference = map.spatialReference;
-        	params.unit = GeometryService.UNIT_METER;
-        	if(snum == 0){
-        		setTimeout(function(){
-        			doBuffer(params,feature);
-        		},1000)
-        	}else{
-        		doBuffer(params,feature);
-        	}
-    	}
-    	//执行buffer
-    	function doBuffer(params,feature){
-        	geoserver.buffer(params, function(results){
-        		showBuffer(results,feature);
-        		snum = snum + 1;
-        		analysisTJ(snum);
-        	});
-    	}
-    	//展示缓冲区
-    	function showBuffer(res,feature){
- 	        var symbol = new SimpleFillSymbol(
- 	                SimpleFillSymbol.STYLE_SOLID,
+        var a = document.createElement("a");
+        a.herf = "#";
+        a.innerHTML = listObj.名称;        	
+        li.appendChild(a);       	
+        $(".menuList").append(li);
+    }
+    //生成buffer参数params
+    function lineBuffer(pipe,tj){
+    	var buffergeo = pipe.geometry;
+    	var distance = tj.distance;
+        var params = new BufferParameters();
+        params.geometries = [buffergeo];
+        params.distances = [distance];
+        params.outSpatialReference = map.spatialReference;
+        params.unit = GeometryService.UNIT_METER;
+        //展示该线缓冲区
+        geoserver.buffer(params, function(results){
+        	var symbol = new SimpleFillSymbol(
+        			SimpleFillSymbol.STYLE_SOLID,
  	                new SimpleLineSymbol(
- 	                  SimpleLineSymbol.STYLE_SOLID,
- 	                  new Color([255,0,0,0.65]),
- 	                  0.5
+ 	                		SimpleLineSymbol.STYLE_SOLID,
+ 	                		new Color([255,0,0,0.65]),
+ 	                		0.5
  	                ),
  	                new Color([255,0,0,0.35])
  	              );
- 	        var geometry = res[0];
- 	        var attr = feature.attributes;
+ 	        var geometry = results[0];
+ 	        var attr = pipe.attributes;
+ 	        attr.soglevel1 = tj.soglevel1;
+ 	        attr.soglevel2 = tj.soglevel2;
+ 	       	attr.soglevel3 = tj.soglevel3;
  	        var buffers = new Graphic(geometry,symbol,attr,null);
  	        bufferLayer.add(buffers);
- 	    }
+        });
     }
+    
   //展示列表选择的管线
-    function selectLine(linegeo){
-    	drawLayer.clear();
-    	var symbol = new SimpleLineSymbol(
-                esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                new dojo.Color([0, 0, 255]),
-                5
-            );
-    	var line = linegeo.getExtent();
-        map.setExtent(line.expand(1));
-        var selectgra = new Graphic(linegeo,symbol,null,null);
-        drawLayer.add(selectgra);
+    function selectLine(lineid){
+    	var pipes = pipeLayer.graphics;
+    	for(var i = 0;i<pipes.length;i++){
+    		var pipe = pipes[i];
+    		if(lineid == pipe.attributes.OBJECTID){
+    			pipe.setSymbol(Sym_Slect);
+    			select = 1;
+    		}
+    	}
     }
 /*******修改缓冲区条件*********/
     makeChange = function(data){
-    	changeBuffer(data);
-    	changeData(data);
-    }
-    function changeData(data){
         $.ajax({
             async: false,
             type: 'post',
@@ -216,35 +234,115 @@ require([
             datatype: "json",
             cache: false,
             success: function() {
-        		alert("ok!!!");
+        		changeBuffer(data);
+        		for(var i = 0;i<pipes.length;i++){
+    	    		var pipe = pipes[i];
+    	    		pipe.setSymbol(Sym_PIPE);
+    	    		select = 0;
+    	    	}
             }
         });
     }
     function changeBuffer(data){//修改数值后改变地图显示
-    	console.log(data);
+    	var currentid = data["gxyjtjEntity.piplineid"];
+    	var buffers = bufferLayer.graohics;
+    	//删除原buffer
+    	for(var i = 0;i < buffers.length;i++){
+    		var pipe = buffers[i];
+    		if(currentid == buffer.attributes.OBJECTID){
+    			bufferLayer.remove(pipe);		
+    		}
+    	}
+    	//建立新buffer
+    	var pipes = pipeLayer.graphics;
+    	for(var i = 0;i < pipes.length;i++){
+    		var pipe = pipes[i];
+    		if(currentid == pipe.attributes.OBJECTID){
+    			console.log(pipe);
+    			var tj = {};
+    			tj.distance = data["gxyjtjEntity.distance"];
+    			tj.soglevel1 = data["gxyjtjEntity.soglevel1"];
+    			tj.soglevel2 = data["gxyjtjEntity.soglevel2"];
+    			tj.soglevel3 = data["gxyjtjEntity.soglevel3"];
+    			lineBuffer(pipe,tj);
+    		}
+    	}
     }
-    
-/*******查询船舶并判断是否预警********/
-//	setInterval(function() {
-    //  searchShip();
-//}, 3000);
-    function searchShip(){//查询AIS船舶位置
+
+/*******查询所有船舶预警记录********/
+    showALLship = function(){
     	$.ajax({
             async: false,
             type: 'post',
-            data: {leftDown:"122.46928635402679,31.258482969685343",
-    			rightTop:"122.978342362726,31.65675566741944"},		
-            url: pageurl+'/hydg/ais/ais_areaQuery.do',
+//            data: data,	
+            url: pageurl+'/hydg/pip/pip_fetchWgcbAll.do',
             datatype: "json",
             cache: false,
             success: function(json) {
     			var allship = eval(json);
-    			console.log(allship);
-                analysisShip(allship);
+    			console.log(i+"---"+allship.length);
+                showWGship(allship);
             }
         });
     }
+    function showWGship(allship){
+    	shipLayer.clear();
+    	for(var i = 0;i<100;i++){
+    		var shipinfo = allship[i];
+            var mapxy = toXY(shipinfo.longitude, shipinfo.latitude);
+            var pos = new Point(mapxy[0], mapxy[1], map.spatialReference);
+            var symbol = new PictureMarkerSymbol('../images/ship0.png', 50, 50);
+        	var attr = {cablename : shipinfo.cablename,
+        			addtime : shipinfo.addtime,
+        			warningrank : shipinfo.warningrank,
+        			mmsi : shipinfo.mmsi,
+        			sog : shipinfo.sog,
+        			cog : shipinfo.cog,
+        			thead : shipinfo.thead};
+        	var infoTemplate = new InfoTemplate("mmsi：${mmsi}",
+                    "预警时速：${sog}<br>对地航向：${cog}米" +
+                    "<br>预警级别:${warningrank}<br>预警时间:${addtime}<br>所近海缆：${cablename}");
+        	var shipgra = new Graphic(pos,symbol,attr,infoTemplate);
+        	shipLayer.add(shipgra);
+    	}
+    }
+/*******查询预警记录结束*********/
+
+/*******查询船舶并判断是否预警********/
+	setInterval(function() {
+//      searchShip();
+}, 300000);
+    searchShip = function(){//查询AIS船舶位置
+    	var areas = [{leftDown: "121.2125544595674,31.830022415195486", rightTop: "121.30858289925477,31.89031504823554"},
+    	         	{leftDown: "121.64290604387003,31.653616388706254", rightTop: "121.70875056343641,31.771627362573955"},
+    	         	{leftDown: "121.32516263521605,31.49877001884931", rightTop: "121.41864026867658,31.646790727854903"},
+    	         	{leftDown: "121.4421450030734,31.4454039447371", rightTop: "121.60816384167073,31.544131159983504"},
+    	         	{leftDown: "121.65689095915971,31.31552936299345", rightTop: "121.78923346215635,31.496629977609537"},
+    	         	{leftDown: "121.78926383520536,31.33770676253352", rightTop: "121.81994272838118,31.364831800642712"},
+    	         	{leftDown: "121.88449490477709,31.558161625663132", rightTop: "123.51578646607689,31.874135777710837"},
+    	         	{leftDown: "123.01851322056585,31.043709896640657", rightTop: "123.50576199790945,31.542716339166514"},
+    	         	{leftDown: "122.27293515312739,31.36067147726973", rightTop: "123.05004953925294,31.608779805932098"},
+    	         	{leftDown: "121.83525822774656,30.33179205040375", rightTop: "123.53174384331514,30.945995228015086"}];
+
+    	for(var i = 0;i<areas.length;i++){
+    		var data = areas[i];
+    		$.ajax({
+                async: false,
+                type: 'post',
+                data: data,	
+                url: pageurl+'/hydg/ais/ais_areaQuery.do',
+                datatype: "json",
+                cache: false,
+                success: function(json) {
+        			var allship = eval(json);
+        			console.log(i+"---"+allship.length);
+                    analysisShip(allship);
+                }
+            });
+    	}
+    }
     function analysisShip(allship){
+    	shipLayer.clear();
     	for(var i = 0;i < allship.length;i++){
 	    	  var shipinfo = allship[i];
               var mapxy = toXY(shipinfo.longitude, shipinfo.latitude);
@@ -285,7 +383,7 @@ require([
         			latitude : shipinfo.latitude};
         	var shipgra = new Graphic(pos,symbol,attr,null);
         	shipLayer.add(shipgra);
-        	saveAIScb(linename,shipgra,linename);
+        	saveAIScb(linename,shipgra,bjly);
     	}
     }
 /********根据雷达信息判断*************/
@@ -335,6 +433,8 @@ require([
         }, 3000);
     }
 })
+
+
 /****上传AIS预警船舶信息*****/
 function saveAIScb(linename,shipinfo,bjly){
 	var data = {
@@ -355,6 +455,7 @@ function saveAIScb(linename,shipinfo,bjly){
 		async : false,
 		success : function(result){
 //			alert("ok!!!!!");
+			
 		}
 	})
 }
@@ -411,7 +512,7 @@ function toXY(Aa, Bb){
     s = C * (B0 * BR + Math.sin(BR) * (B2 * Math.cos(BR) + B4 * MZ((Math.cos(BR)), 3) + B6 * MZ((Math.cos(BR)), 5) + B8 * MZ((Math.cos(BR)), 7)))
 
     var t = Math.tan(BR);
-    var g = e2 * Math.cos(BR); 
+    var g = e2 * Math.cos(BR);
     var XR = s + MZ(lo, 2) / 2 * N * Math.sin(BR) * Math.cos(BR) + MZ(lo, 4) * N * Math.sin(BR) * MZ((Math.cos(BR)), 3) / 24 * (5 - MZ(t, 2) + 9 * MZ(g, 2) + 4 * MZ(g, 4)) + MZ(lo, 6) * N * Math.sin(BR) * MZ((Math.cos(BR)), 5) * (61 - 58 * MZ(t, 2) + MZ(t, 4)) / 720; 
     var YR = lo * N * Math.cos(BR) + MZ(lo, 3) * N / 6 * MZ((Math.cos(BR)), 3) * (1 - MZ(t, 2) + MZ(g, 2)) + MZ(lo, 5) * N / 120 * MZ((Math.cos(BR)), 5) * (5 - 18 * MZ(t, 2) + MZ(t, 4) + 14 * MZ(g, 2) - 58 * MZ(g, 2) * MZ(t, 2));
     mapX = YR + falseE;

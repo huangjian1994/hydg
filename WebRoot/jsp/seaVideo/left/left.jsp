@@ -186,7 +186,7 @@
 				<dd>
 					<div class="title">
 						<span class="tle"><img src="${contextPath}/images/seabedPipeline/leftico01.png" /></span>
-						<a class="easyui-linkbutton" href="#" onclick="addTab('智能视频分析',‘${contextPath}/seaRecord/seaRecord_znspfx_maintop.do')">智能视频分析</a>
+						<a class="easyui-linkbutton" href="#" onclick="addTab('智能视频分析',‘${contextPath}/jsp/seaVideo/jsp/spjk/znpfx.jsp')">智能视频分析</a>
 					</div>					
 				</dd>
 			</dl>

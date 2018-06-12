@@ -3,7 +3,7 @@ var pageurl = 'http://'+ host;
 
 $(function() {
     //加载菜单    
-    searchMenu = function searchMenu() {
+    function searchMenu() {
         url = pageurl+'/hydg/coastline/cl_loadAllAnalyze.do';
         $.ajax({
             async: false,
@@ -45,7 +45,7 @@ $(function() {
                 							'<input type="checkbox" name="海岸线">'+
                 							'<span>' + this.lineName + '</span>' + operate + 
                 						'</div>'+
-                						'<div class="dropdown-menu">'+
+                						'<div class="dropdown-menu" id="dropdown-menu'+k+'">'+
                 							'<table>'+
                 								'<tr>'+
                 									'<td class="line">名称:</td><td><input id="name" type="text" value="' + this.lineName + '" class="name"></td>'+
@@ -64,8 +64,10 @@ $(function() {
                 								'</tr>'+
                 								'<tr>'+
                 									'<td class="line-button" colspan="2">'+
-                										'<button class="save button button-pill button-primary">确定</button>&nbsp'+
-                										'<button class="back button button-pill button-primary">取消</button>'+
+                										'<a id = "ensure" style = "line-height: 20px;height: 20px;background-color: black;padding: 0 10px;border-radius: 200px;font-weight: 300;'
+            									    	+'color: #FFF;text-align: center; hover">确定</a>&nbsp'+
+                										'<a id = "cancle" style = "line-height: 20px;height: 20px;background-color: black;padding: 0 10px;border-radius: 200px;font-weight: 300;'
+                									    +'color: #FFF;text-align: center;">取消</a>'+
                 									'</td>'+
                 								'</tr>'+
                 							'</table>'+
@@ -74,13 +76,13 @@ $(function() {
                     $(li).html(menu_list);
                     $(".option-contain ul").append(li);
                 })
-                showLine();
+//                showLine();
             }
         });
     }
     searchMenu();
-    close();
-    //checkbox（需要修改）
+//    close();
+//checkbox（需要修改）
     function showLine() {
         for (var i = 0; i < $('input[type="checkbox"]').length; i++) {
             (function(indexI) {
@@ -113,13 +115,13 @@ $(function() {
 function change(obj) {
 	var li_result = $(obj).parent().parent().parent().parent(".result");
 	li_result.find(".dropdown-menu").slideDown();			    		
-	li_result.find(".dropdown-menu .save").on("click", function() {
+	li_result.find("#ensure").on("click", function() {
 		var id = li_result.attr("lineId");
 		editInfo(id,1);
 		li_result.find(".dropdown-menu").slideUp();
 
 	});
-	li_result.find(".dropdown-menu .back").on("click", function() {		
+	li_result.find("#cancle").on("click", function() {
 		li_result.find(".dropdown-menu").slideUp();
 	});
 };
@@ -141,7 +143,6 @@ function callback() {
 }
 //上传
 function showUp() {
-    //console.log(1);
     //getLineData();
     $("#submit").slideDown();
 }

@@ -53,7 +53,33 @@ require([
         map.centerAt(mapCenter);
         $('body').addClass('loaded');
         $('#loader-wrapper .load_title').remove();
+//        searchLine();
     });
+    /*****查询管线并显示*****/
+    function searchLine(){
+    	var Sym_PIPE = new SimpleLineSymbol(
+                esri.symbol.SimpleLineSymbol.STYLE_DASH,
+                new dojo.Color([0, 0, 0]),
+                1
+            );
+    	var queryTask = new QueryTask(yewuUrl+"/16");
+        var query = new Query();
+        query.where = "OBJECTID >= 0 ";
+        query.outFields = ["*"];
+        query.returnGeometry = true;
+        queryTask.execute(query,function(res){
+        	for(var i = 0;i<res.features.length;i++){
+        		var line = res.features[i];
+        		var infoTemplate = new InfoTemplate("名称：${名称}",
+                        "OBJECTID：${OBJECTID}<br>长度：${LENGTH}米" +
+                        "<br>OUTPUT84_：${OUTPUT84_}<br>OUTPUT84_I:${OUTPUT84_I}<br>光缆类别:${光缆类别}");
+        		line.setSymbol(Sym_PIPE);
+        		line.setInfoTemplate(infoTemplate);
+        		pipeLayer.add(line);
+        	}
+        });     
+    }
+    /*****查询管线显示完毕*****/
     /*
      * mmsi查询
      */

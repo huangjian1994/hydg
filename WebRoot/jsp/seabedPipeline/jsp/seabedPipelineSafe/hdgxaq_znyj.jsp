@@ -9,6 +9,7 @@
 		<link href="${contextPath}/css/style.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="${contextPath}/css/load.css" />
 		<link href="${contextPath}/css/yy.css" rel="stylesheet" type="text/css" />
+		<link href="${contextPath}/css/button.css" rel="stylesheet" type="text/css" />
 		<link href="${contextPath}/css/seabedPipeline/znyj.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="http://localhost/arcgis_js_v316_sdk/arcgis_js_api/library/3.16/3.16/dijit/themes/tundra/tundra.css" />
 	    <link rel="stylesheet" type="text/css" href="http://localhost/arcgis_js_v316_sdk/arcgis_js_api/library/3.16/3.16/esri/css/esri.css" />
@@ -46,8 +47,6 @@
             //查看详情，包括静态数据，船舶档案
             function xq(mmsid,dtjd,dtwd){
                 document.getElementById("mmsid").value = mmsid;
-                alert(dtjd);
-                alert(dtwd);
 
                 document.getElementById("dtjd").value = dtjd;
                 document.getElementById("dtwd").value = dtwd;
@@ -86,7 +85,7 @@
            					"gxyjtjEntity.piplinename":listName,
            					"gxyjtjEntity.piplineid":$("#object").val(),
            					"gxyjtjEntity.distance":$("#distance").val(),
-           					"gxyjtjEntity.unit":$("#unit").val(),
+           					"gxyjtjEntity.unit":'米',
            					"gxyjtjEntity.soglevel1":$("#linesog1").val(),
            					"gxyjtjEntity.soglevel2":$("#linesog2").val(),
            					"gxyjtjEntity.soglevel3":$("#linesog3").val()}
@@ -114,7 +113,7 @@
 					<div class="itab" >
 						<ul>
 							<li><a href="#tab1" class="selected">违规船舶信息记录</a></li>
-							<li><a href="#tab2" >船舶位置</a></li>
+							<li><a href="#tab2" >预警条件设置</a></li>
 						</ul>
 					</div>
 					<div class="tabscont" >
@@ -155,7 +154,7 @@
 										<th>船舶mmsi</th>
 										<th>航速(单位1/10节)</th>
 										<th>经度</th>
-										<th>维度</th>
+										<th>纬度</th>
 										<th>对地航向(1/10度为单位)</th>
 										<th>光缆名称</th>
 										<th>警报等级</th>
@@ -201,6 +200,10 @@
 						</div>
 						<div id="tab2" class="tabson" style="position: relative;height: 100%;">
 							<div id="map"></div>
+							<div style="position:absolute;right:10px;top:55px;">
+								<button class="button button-raised button-rounded button-glow button-primary" style="height:35px;padding:0 10px;" value="EXTENT" onclick="showALLship();">所有预警记录</button>
+								<button class="button button-raised button-rounded button-glow button-primary" style="height:35px;padding:0 10px;" value="CIRCLE" onclick="searchShip();">实时预警船舶</button>
+							</div>
 							<div class="controlVisible">
 								<a href="#"> 
 									<img src="${contextPath}/images/seasProfession/right-jiantou.png" />
@@ -208,7 +211,7 @@
 							</div>
 							<div class="seabedLine">
 								<div class="title">
-									<span>海岸线列表</span>
+									<span onclick = "reloadpipe()">海岸线列表</span>
 								</div>
 								<div class="contain">
 									<div id="scroll">
@@ -219,7 +222,7 @@
 								</div>							
 							</div>
 							<div class="seabedSet">
-								<table class="tablelist2" align="center">
+								<table class="tablelist2"  align="center">
 									<tr>
 										<th colspan="2">海岸线设置条件</th>
 									</tr>									 					
@@ -229,23 +232,19 @@
 									</tr>
 									<tr>
 										<td width="22%" style="background-color:#f5f8fa;">距离：</td>
-										<td width="75%"><input id="distance" type="text"></td>
-									</tr>
-									<tr>
-										<td width="22%" style="background-color:#f5f8fa;" >单位：</td>
-										<td width="75%"><input id="unit"type="text"></td>
+										<td width="75%"><input id="distance" type="text">（米）</td>
 									</tr>
 									<tr>
 										<td width="22%" style="background-color:#f5f8fa;">一级航速：</td>
-										<td width="75%"><input id="linesog1"type="text"></td>
+										<td width="75%"><input id="linesog1"type="text">（1/10节）</td>
 									</tr>
 									<tr>
 										<td width="22%" style="background-color:#f5f8fa;">二级航速：</td>
-										<td width="75%"><input id="linesog2"type="text"></td>
+										<td width="75%"><input id="linesog2"type="text">（1/10节）</td>
 									</tr>
 									<tr>
 										<td width="22%" style="background-color:#f5f8fa;">三级航速：</td>
-										<td width="75%"><input id="linesog3"type="text"></td>
+										<td width="75%"><input id="linesog3"type="text">（1/10节）</td>
 									</tr>
 									<tr>
 										<td colspan="2" style="text-align:center;">

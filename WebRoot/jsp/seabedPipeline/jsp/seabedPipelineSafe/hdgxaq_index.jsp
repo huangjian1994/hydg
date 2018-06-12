@@ -29,7 +29,7 @@
 	<script type="text/javascript">
         function searchToggle(obj, evt){
             var container = $(obj).closest('.search-wrapper');
-
+			changeSym();
             if(!container.hasClass('active')){
             	  $(".container").css("left","200px");
                   container.addClass('active');
