@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="hydg:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/hydg_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="hydg" />
+          <element id="jpa-descriptors" facet="hydg/jpa/JPA" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="hydg/web/Web2" />
+      <element id="javaee-facet-resources" facet="hydg/web/Web" />
+    </root>
+  </artifact>
+</component>

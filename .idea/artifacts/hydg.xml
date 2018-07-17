@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hydg">
+    <output-path>D:/ideaTest</output-path>
+    <root id="archive" name="hydg.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/WebRoot" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="antlr-2.7.6" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

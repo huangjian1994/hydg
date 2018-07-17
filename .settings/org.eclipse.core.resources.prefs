@@ -1,0 +1,19 @@
+#Fri Aug 11 16:36:11 CST 2017
+eclipse.preferences.version=1
+encoding//WebRoot/jsp/seabedPipeline/jsp/groundWaveRadarInformation/dbldxx_detail.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/groundWaveRadarInformation/dbldxx_update.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/bjlb.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/detail.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_cbjkxxksh.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_index.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_wgjbgl.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/hdgxaq_znyj.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/wgjbgl_add.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/seabedPipelineSafe/wgjbgl_uptate.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_add.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_detail.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_index.jsp=UTF-8
+encoding//WebRoot/jsp/seabedPipeline/jsp/shipPositioningInformation/cbdwxx_update.jsp=UTF-8
+encoding//core/config/struts.properties=UTF-8
+encoding/<project>=UTF-8
