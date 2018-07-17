@@ -17,15 +17,16 @@
 
                 $("#cz").click(function () {
                     $("#radarareacode").val("");
-                    $("#mmsi").val("");
+                    $("#oId").val("");
                     $("#hhShip").val("");
                     $("#deipTime").val("");
                 })
             });
 
             //船舶详情
-            function cbxq(mmsi) {
-				location="${contextPath}/dbld/dbld_fetchBoatxqDbld.do?dbldxxEntity.mmsi=" + mmsi;
+            function cbxq(oId) {
+                alert(oId);
+				location="${contextPath}/dbld/dbld_fetchBoatxqDbld.do?dbldxxEntity.mmsi=" + oId;
             }
 
             //地波雷达详情
@@ -47,7 +48,7 @@
 
 		<div class="formbody">
             <s:form name="dbld" namespace="/dbld" action="dbld_fetchDbldxx.do" method="post" >
-				<input name="mmsid" id="mmsid" value="" type="hidden" />
+				<input name="oIdi" id="oIdi" value="" type="hidden" />
                 <div class="leftinfo1">
                     <div class="listtitle3"><img src="${contextPath}/images/seabedPipeline/ico06.png" width="25" height="25" />条件查询</div>
                     <table width="100%" align="center" style="text-align:center;">
@@ -58,7 +59,7 @@
                             </td>
                             <td>船舶Mmsi：</td>
                             <td>
-								<s:textfield name="dbldxxEntity.mmsi" id="mmsi" ></s:textfield>
+								<s:textfield name="dbldxxEntity.oId" id="oId" ></s:textfield>
                             </td>
                         </tr>
                         <tr>
@@ -90,10 +91,11 @@
 					<th>序号</th>
 					<th>雷达区号</th>
 					<th>船舶mmsi</th>
-					<th>本地船名</th>
-					<th>距离(千米)</th>
+					<th>船名</th>
+
 					<th>经度</th>
 					<th>维度</th>
+					<th>航向(1/10度为单位)</th>
 					<th>航速(单位1/10节)</th>
 					<th>船舶呼号</th>
 					<th>详情</th>
@@ -104,11 +106,12 @@
 				<tr>
 					<th>${j.count}</th>
 					<td>${dbldxx.radarareacode}</td>
-					<td><a href="javascript:void(0)" onclick="cbxq('${dbldxx.mmsi}')" class="tablelink">${dbldxx.mmsi}</a></td>
-					<td>${dbldxx.shipname}</td>
-					<td>${dbldxx.distance}</td>
+					<td><a href="javascript:void(0)" onclick="cbxq('${dbldxx.oId}')" class="tablelink">${dbldxx.oId}</a></td>
+					<td>${dbldxx.eShipname}</td>
+
 					<td>${dbldxx.longitude}</td>
 					<td>${dbldxx.latitude}</td>
+					<td>${dbldxx.azimuth}</td>
 					<td>${dbldxx.speed}</td>
 					<td>${dbldxx.hhShip}</td>
 					<td>

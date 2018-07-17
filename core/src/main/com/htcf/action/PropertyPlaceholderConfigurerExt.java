@@ -35,7 +35,7 @@ public class PropertyPlaceholderConfigurerExt extends PropertyPlaceholderConfigu
     
     public static void main(String[] args) {
     	String username = "HYDGCF";
-    	String password = "HYDGCF";
+    	String password = "Hydgcf$0627";
    	  	ThreeDes des = new ThreeDes();  
    	  	if (username != null) { 
              des.getKey(ThreeDes.generateKeyStr);  

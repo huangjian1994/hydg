@@ -13,8 +13,7 @@ import javax.persistence.*;
  * @author by hj on 2018-4-3.
  */
 @Entity
-@Table(name = "OTH_SW"//, schema = "HYDGCF"
- )
+@Table(name = "OTH_SW")
 public class HdgxDbldxxEntity {
     private long id;
     private String radarareacode;

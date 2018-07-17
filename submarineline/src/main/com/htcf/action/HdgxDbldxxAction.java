@@ -81,7 +81,7 @@ public class HdgxDbldxxAction extends BaseAction {
     	@Create 2017-12-28 17:01
     	 */
     public String fetchBoatxqDbld(){
-        System.out.println("预警船舶详情mmsi"+dbldxxEntity.getMmsi());
+        System.out.println("预警船舶详情oid"+dbldxxEntity.getMmsi());
         String cmd1 = "0x0121";
         si = "{mmsi:\""+dbldxxEntity.getMmsi()+"\"}";
         sicode = Base64Util.encode(si.getBytes());
