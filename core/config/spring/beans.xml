@@ -11,7 +11,9 @@
 	<context:annotation-config />
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
+
+
+
 	<context:component-scan base-package="com.htcf">
 		<context:include-filter type="regex" expression=".service.*" />
 		<context:include-filter type="regex" expression=".action.*" />
@@ -30,6 +32,7 @@
                 </property>
               
         </bean>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${driverClassName}"></property>
 		<property name="url" value="${url}"></property>
@@ -37,7 +40,9 @@
 		<property name="username" value="${username}"></property>
 		<property name="password" value="${password}"></property>
 
-	</bean>   
+	</bean>
+
+    <!--spring 配置hibernate，这样就不需要hibernate.cfg.xml -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.htcf.entity" />
@@ -72,18 +77,21 @@
 	</bean>
 
 	-->
-	
+    <!--给hibernate配置事务 -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory">
 			<ref local="sessionFactory"/>
 		</property>
 	</bean>
-	
+
+    <!-- 配置事务-->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
+
+    <!--配置切点 -->
 	<aop:config>
 		<aop:pointcut id="txServiceOperation" expression="execution(* com.htcf.service.impl.*.*(..))" />
 		<aop:advisor pointcut-ref="txServiceOperation" advice-ref="txAdvice" />
