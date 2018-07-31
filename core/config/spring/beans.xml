@@ -89,16 +89,17 @@
 		<aop:advisor pointcut-ref="txServiceOperation" advice-ref="txAdvice" />
 	</aop:config>
 
-	<!-- 定时 -->
+	<!-- 定时 指定类 -->
 	<bean id="sbdcptAct" class="com.htcf.action.SbdcptAction" />
 	<bean id="messagePushAction" class="com.htcf.action.MessagePushAction" />
-	<!-- 市规土局反馈 -->
+	<!-- 市规土局反馈  具体的方法-->
 	<bean name="run_bean1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="sbdcptAct" />
 		<property name="targetMethod">
 			<value>fetchVwSeaRightinfo</value>
 		</property>
 	</bean>
+	<!--设定触发器，触发周期 -->
 	<bean id="sx_trigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
 	      <property name="jobDetail">
 	          <ref bean="run_bean1" />
@@ -107,14 +108,18 @@
 	           <value>10 20 20 * * ?</value>
 	      </property>
 	</bean>
+
+	<!--启动定时任务， -->
     <bean id="d1" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
+				<!-- 这里添加多个定时任务触发器，对应第2步的bean id-->
                 <ref local="sx_trigger1" />
                 <ref local="msg_trigger" />
             </list>
         </property>     
     </bean>
+
     <!--消息推送-->
 	<bean name="msgTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="messagePushAction" />
